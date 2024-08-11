@@ -140,7 +140,11 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\FallaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OtrasController.cs" />
+    <Compile Include="Controllers\SedeController.cs" />
+    <Compile Include="Controllers\Tipo_EquipoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -164,6 +168,14 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Area\Index.cshtml" />
     <Content Include="Views\Area\AgregarEditar.cshtml" />
+    <Content Include="Views\Sede\Index.cshtml" />
+    <Content Include="Views\Sede\AgregarEditar.cshtml" />
+    <Content Include="Views\Tipo_Equipo\Index.cshtml" />
+    <Content Include="Views\Tipo_Equipo\AgregarEditar.cshtml" />
+    <Content Include="Views\Falla\Index.cshtml" />
+    <Content Include="Views\Falla\AgregarEditar.cshtml" />
+    <Content Include="Views\Otras\Index.cshtml" />
+    <Content Include="Views\Otras\AgregarEditar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

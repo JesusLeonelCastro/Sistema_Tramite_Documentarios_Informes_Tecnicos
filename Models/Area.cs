@@ -71,7 +71,7 @@ namespace Munipocollay_InformesTecnicos.Models
 
         }
 
-        // Obtener_Categoria
+        // Obtener_Area
         public Area Obtener(int id)
         {
 

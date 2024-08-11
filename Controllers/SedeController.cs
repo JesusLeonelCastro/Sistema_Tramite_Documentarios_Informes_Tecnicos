@@ -7,36 +7,36 @@ using System.Web.Mvc;
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
-    public class AreaController : Controller
+    public class SedeController : Controller
     {
-        private Area objarea = new Area();
+        private Sede objsede = new Sede();
 
         public ActionResult Index(string criterio)
         {
             if (criterio == null || criterio == "")
             {
-                return View(objarea.Listar());
+                return View(objsede.Listar());
                 {
 
                 };
             }
             else
             {
-                return View(objarea.Buscar(criterio));
+                return View(objsede.Buscar(criterio));
             }
         }
 
         //Ver_Categoria
         public ActionResult Ver(int id)
         {
-            return View(objarea.Obtener(id));
+            return View(objsede.Obtener(id));
 
         }
 
         //Buscar_Categoria
         public ActionResult Buscar(string criterio)
         {
-            return View(criterio == null || criterio == "" ? objarea.Listar() : objarea.Buscar(criterio));
+            return View(criterio == null || criterio == "" ? objsede.Listar() : objsede.Buscar(criterio));
 
         }
 
@@ -44,26 +44,26 @@ namespace Munipocollay_InformesTecnicos.Controllers
         public ActionResult AgregarEditar(int id = 0)
         {
             return View(
-                id == 0 ? new Area()
-                : objarea.Obtener(id));
+                id == 0 ? new Sede()
+                : objsede.Obtener(id));
 
         }
 
 
         //Guardamos_Categoria
-        public ActionResult Guardar(Area objarea)
+        public ActionResult Guardar(Sede objsede)
         {
             if (ModelState.IsValid)
             {
-                objarea.Guardar();
+                objsede.Guardar();
                 TempData["AlertarGuardar"] = "Se registro se agrego correctamente"; //Alerta de guardado
 
-                return Redirect("~/Area/Index");
+                return Redirect("~/Sede/Index");
 
             }
             else
             {
-                return View("~/Views/Area/AgregarEditar.cshtml");
+                return View("~/Views/Sede/AgregarEditar.cshtml");
             }
 
         }
@@ -72,11 +72,11 @@ namespace Munipocollay_InformesTecnicos.Controllers
         //Eliminamos_Categoria
         public ActionResult Eliminar(int id)
         {
-            objarea.AreaID = id;
-            objarea.Eliminar();
+            objsede.SedeID = id;
+            objsede.Eliminar();
             TempData["AlertarEliminar"] = "El registro se Elimino correctamente"; //Alerta de eliminado
 
-            return Redirect("~/Area/Index");
+            return Redirect("~/Sede/Index");
         }
     }
 }

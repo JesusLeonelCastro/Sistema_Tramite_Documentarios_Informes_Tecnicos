@@ -7,76 +7,76 @@ using System.Web.Mvc;
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
-    public class AreaController : Controller
+    public class OtrasController : Controller
     {
-        private Area objarea = new Area();
+        private O_Actividades objo_Actividades = new O_Actividades();
 
         public ActionResult Index(string criterio)
         {
             if (criterio == null || criterio == "")
             {
-                return View(objarea.Listar());
+                return View(objo_Actividades.Listar());
                 {
 
                 };
             }
             else
             {
-                return View(objarea.Buscar(criterio));
+                return View(objo_Actividades.Buscar(criterio));
             }
         }
 
-        //Ver_Categoria
+        //Ver_Otras
         public ActionResult Ver(int id)
         {
-            return View(objarea.Obtener(id));
+            return View(objo_Actividades.Obtener(id));
 
         }
 
-        //Buscar_Categoria
+        //Buscar_Otras
         public ActionResult Buscar(string criterio)
         {
-            return View(criterio == null || criterio == "" ? objarea.Listar() : objarea.Buscar(criterio));
+            return View(criterio == null || criterio == "" ? objo_Actividades.Listar() : objo_Actividades.Buscar(criterio));
 
         }
 
-        //Editar_Categoria
+        //Editar_Otras
         public ActionResult AgregarEditar(int id = 0)
         {
             return View(
-                id == 0 ? new Area()
-                : objarea.Obtener(id));
+                id == 0 ? new O_Actividades()
+                : objo_Actividades.Obtener(id));
 
         }
 
 
-        //Guardamos_Categoria
-        public ActionResult Guardar(Area objarea)
+        //Guardamos_Otras
+        public ActionResult Guardar(O_Actividades objo_Actividades)
         {
             if (ModelState.IsValid)
             {
-                objarea.Guardar();
+                objo_Actividades.Guardar();
                 TempData["AlertarGuardar"] = "Se registro se agrego correctamente"; //Alerta de guardado
 
-                return Redirect("~/Area/Index");
+                return Redirect("~/Otras/Index");
 
             }
             else
             {
-                return View("~/Views/Area/AgregarEditar.cshtml");
+                return View("~/Views/Otras/AgregarEditar.cshtml");
             }
 
         }
 
 
-        //Eliminamos_Categoria
+        //Eliminamos_Otras
         public ActionResult Eliminar(int id)
         {
-            objarea.AreaID = id;
-            objarea.Eliminar();
+            objo_Actividades.O_ActividadesID = id;
+            objo_Actividades.Eliminar();
             TempData["AlertarEliminar"] = "El registro se Elimino correctamente"; //Alerta de eliminado
 
-            return Redirect("~/Area/Index");
+            return Redirect("~/Otras/Index");
         }
     }
 }

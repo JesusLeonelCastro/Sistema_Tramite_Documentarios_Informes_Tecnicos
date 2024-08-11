@@ -7,36 +7,36 @@ using System.Web.Mvc;
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
-    public class AreaController : Controller
+    public class Tipo_EquipoController : Controller
     {
-        private Area objarea = new Area();
+        private Tipo_Equipo objtipo_equipso = new Tipo_Equipo();
 
         public ActionResult Index(string criterio)
         {
             if (criterio == null || criterio == "")
             {
-                return View(objarea.Listar());
+                return View(objtipo_equipso.Listar());
                 {
 
                 };
             }
             else
             {
-                return View(objarea.Buscar(criterio));
+                return View(objtipo_equipso.Buscar(criterio));
             }
         }
 
         //Ver_Categoria
         public ActionResult Ver(int id)
         {
-            return View(objarea.Obtener(id));
+            return View(objtipo_equipso.Obtener(id));
 
         }
 
         //Buscar_Categoria
         public ActionResult Buscar(string criterio)
         {
-            return View(criterio == null || criterio == "" ? objarea.Listar() : objarea.Buscar(criterio));
+            return View(criterio == null || criterio == "" ? objtipo_equipso.Listar() : objtipo_equipso.Buscar(criterio));
 
         }
 
@@ -44,26 +44,26 @@ namespace Munipocollay_InformesTecnicos.Controllers
         public ActionResult AgregarEditar(int id = 0)
         {
             return View(
-                id == 0 ? new Area()
-                : objarea.Obtener(id));
+                id == 0 ? new Tipo_Equipo()
+                : objtipo_equipso.Obtener(id));
 
         }
 
 
         //Guardamos_Categoria
-        public ActionResult Guardar(Area objarea)
+        public ActionResult Guardar(Tipo_Equipo objtipo_equipso)
         {
             if (ModelState.IsValid)
             {
-                objarea.Guardar();
+                objtipo_equipso.Guardar();
                 TempData["AlertarGuardar"] = "Se registro se agrego correctamente"; //Alerta de guardado
 
-                return Redirect("~/Area/Index");
+                return Redirect("~/Tipo_Equipo/Index");
 
             }
             else
             {
-                return View("~/Views/Area/AgregarEditar.cshtml");
+                return View("~/Views/Tipo_Equipo/AgregarEditar.cshtml");
             }
 
         }
@@ -72,11 +72,11 @@ namespace Munipocollay_InformesTecnicos.Controllers
         //Eliminamos_Categoria
         public ActionResult Eliminar(int id)
         {
-            objarea.AreaID = id;
-            objarea.Eliminar();
+            objtipo_equipso.Tipo_EquipoID = id;
+            objtipo_equipso.Eliminar();
             TempData["AlertarEliminar"] = "El registro se Elimino correctamente"; //Alerta de eliminado
 
-            return Redirect("~/Area/Index");
+            return Redirect("~/Tipo_Equipo/Index");
         }
     }
 }
