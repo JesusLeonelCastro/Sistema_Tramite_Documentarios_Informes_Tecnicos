@@ -76,3 +76,7 @@ C:\Users\jesca\Desktop\Munipocollay_InformesTecnicos\obj\Debug\Munipocollay_Info
 C:\Users\jesca\Desktop\Munipocollay_InformesTecnicos\obj\Debug\Munipocollay_InformesTecnicos.csproj.CopyComplete
 C:\Users\jesca\Desktop\Munipocollay_InformesTecnicos\obj\Debug\Munipocollay_InformesTecnicos.dll
 C:\Users\jesca\Desktop\Munipocollay_InformesTecnicos\obj\Debug\Munipocollay_InformesTecnicos.pdb
+C:\Users\jesca\Desktop\Munipocollay_InformesTecnicos\bin\EntityFramework.dll
+C:\Users\jesca\Desktop\Munipocollay_InformesTecnicos\bin\EntityFramework.SqlServer.dll
+C:\Users\jesca\Desktop\Munipocollay_InformesTecnicos\bin\EntityFramework.xml
+C:\Users\jesca\Desktop\Munipocollay_InformesTecnicos\bin\EntityFramework.SqlServer.xml
