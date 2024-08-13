@@ -22,6 +22,8 @@ namespace Munipocollay_InformesTecnicos.Models
         public virtual DbSet<Tipo_Equipo> Tipo_Equipo { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
 
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }

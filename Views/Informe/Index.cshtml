@@ -1,0 +1,551 @@
+﻿@model List<Munipocollay_InformesTecnicos.Models.Informes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
+
+@if (TempData["AlertarGuardar"] != null) //Alerta de Guardar
+{
+    <div class="alert alert-outline-success d-flex align-items-center" role="alert">
+        <span class="fas fa-check-circle text-success fs-5 me-3"></span>
+        <p class="mb-0 flex-1">@TempData["AlertarGuardar"]</p>
+        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["AlertarEliminar"] != null) //Alerta de Eliminar
+{
+    <div class="alert alert-outline-warning d-flex align-items-center" role="alert">
+        <span class="fas fa-check-circle text-warning fs-5 me-3"></span>
+        <p class="mb-0 flex-1">@TempData["AlertarEliminar"]</p>
+        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<div class="card shadow-none border my-4" data-component-card="data-component-card">
+    <div class="card-header p-4 border-bottom bg-body">
+
+        <center><h2>ARTICULOS</h2></center>
+    </div>
+    <div class="card-body p-4">
+        <!--Contenerdor Card-->
+        <div id="tableExample3" data-list='{"valueNames":["name","email","age"],"page":20,"pagination":true}'>
+
+            <!--Tabla-->
+            <div class="search-box mb-3 d-flex justify-content-start align-items-center">
+                <button class="btn btn-phoenix-primary me-3 mb-1" type="button" onclick="window.location.href='AgregarEditar'">Agregar</button>
+
+                @*<div style="width: 100%; display: flex; justify-content: flex-end;">
+                    <select class="form-select form-select-sm" id="categoryFilter"
+                            style="min-width: 200px; margin-left: auto;"
+                            onchange="filterByCategory()">
+                        <option value="">Todas las Categorías</option>
+                        @foreach (var categoria in ViewBag.Categorías)
+                        {
+                            <option value="@categoria.nombre_categoria">@categoria.nombre_categoria</option>
+                        }
+                    </select>
+                </div>*@
+
+            </div>
+
+            <form class="position-relative d-flex">
+                <input class="form-control search-input search form-control-sm" type="search" id="searchInput" placeholder="Buscar" aria-label="Search">
+            </form>
+
+
+
+            <br />
+            <div class="table-responsive">
+                <table class="table table-striped table-sm fs-9 mb-0 display">
+                    <thead>
+                        <tr>
+                            <th class="sort border-top border-translucent ps-3" data-sort="name">Id</th>
+                            <th class="sort border-top" data-sort="email">Titulo</th>
+                            <th class="sort border-top" data-sort="email">Fecha Solicitud</th>
+                            <th class="sort border-top" data-sort="email">Fecha Informe</th>
+                            <th class="sort border-top" data-sort="email">Diagnostico</th>
+                            <th class="sort border-top" data-sort="email">Solucion Primaria</th>
+
+                            <th class="sort border-top" data-sort="email">Area ID</th>
+                            <th class="sort border-top" data-sort="email">Sede ID</th>
+                            <th class="sort border-top" data-sort="email">Tipo Equipo ID</th>
+                            @*<th class="sort border-top" data-sort="email">Equipo ID</th>
+                            <th class="sort border-top" data-sort="email">Falla ID</th>
+                            <th class="sort border-top" data-sort="email">O.Acividaddes ID</th>
+                            <th class="sort border-top" data-sort="email">Estado ID</th>*@
+
+
+                            <th class="sort text-center align-middle pe-0 border-top" scope="col">Accion</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="list">
+
+                        @foreach (var m in Model)
+                        {
+                            @*<tr class="table-row" data-category="@m.Area?.Nombre_Area?.ToLower() ?? " Area no disponible"">
+                            <tr class="table-row" data-category="@m.Sede?.Nombre_Sede?.ToLower() ?? " Sede no disponible"">
+                            <tr class="table-row" data-category="@m.Tipo_Equipo?.Nombre?.ToLower() ?? " Tipo Equipo no disponible"">
+                            <tr class="table-row" data-category="@m.Equipo?.Nombre_Equipo?.ToLower() ?? " Esquipo no disponible"">
+                            <tr class="table-row" data-category="@m.Falla?.Nombre_Falla?.ToLower() ?? " Falla no disponible"">
+                            <tr class="table-row" data-category="@m.O_Actividades?.Nombre_O_Actividades?.ToLower() ?? " Actividad no disponible"">
+                            <tr class="table-row" data-category="@m.Estados?.Nombre_Estado?.ToLower() ?? " Estao no disponible"">*@
+
+                                <td class="align-middle ps-3 name">@m.InformeID</td>
+                                <td class="align-middle email">@m.Titulo</td>
+                                <td class="align-middle email">@m.Fecha_Solicitud</td>
+                                <td class="align-middle email">@m.Fecha_Informe</td>
+                                <td class="align-middle email">@m.Diagnostico</td>
+                                <td class="align-middle email">@m.Solucion_Primaria</td>
+
+
+                                <td class="align-middle email category-column">
+                                    @if (m.Area != null)
+                                    {
+                                        @m.Area.Nombre_Area
+                                    }
+                                    else
+                                    {
+                                        <span>Area no disponible</span>
+                                    }
+                                </td>
+
+                                <td class="align-middle email category-column">
+                                    @if (m.Sede != null)
+                                    {
+                                        @m.Sede.Nombre_Sede
+                                    }
+                                    else
+                                    {
+                                        <span>Sede no disponible</span>
+                                    }
+                                </td>
+
+                                <td class="align-middle email category-column">
+                                    @if (m.Tipo_Equipo != null)
+                                    {
+                                        @m.Tipo_Equipo.Nombre
+                                    }
+                                    else
+                                    {
+                                        <span>Tipo de equipo no disponible</span>
+                                    }
+                                </td>
+
+                                @*<td class="align-middle email category-column">
+                                    @if (m.Equipo != null)
+                                    {
+                                        @m.Equipo.Nombre_Equipo
+                                    }
+                                    else
+                                    {
+                                        <span>Equipo no disponible</span>
+                                    }
+                                </td>
+
+                                <td class="align-middle email category-column">
+                                    @if (m.Falla != null)
+                                    {
+                                        @m.Falla.Nombre_Falla
+                                    }
+                                    else
+                                    {
+                                        <span>Falla no disponible</span>
+                                    }
+                                </td>
+
+                                <td class="align-middle email category-column">
+                                    @if (m.O_Actividades != null)
+                                    {
+                                        @m.O_Actividades.Nombre_O_Actividad
+                                    }
+                                    else
+                                    {
+                                        <span>Actividades no disponible</span>
+                                    }
+                                </td>
+
+                                <td class="align-middle email category-column">
+                                    @if (m.Estados != null)
+                                    {
+                                        @m.Estados.Nombre_Estado
+                                    }
+                                    else
+                                    {
+                                        <span>Estado no disponible</span>
+                                    }
+                                </td>*@
+
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+
+                                    <!-- Botón "Ver" -->
+                                    <button class="btn btn-phoenix-info me-1 mb-1" type="button" data-bs-toggle="modal" title="Ver" data-bs-target="#modalVer-@m.InformeID">
+                                        <span class="text" data-feather="eye" style="height: 15px; width: 15px;"></span>
+                                    </button>
+
+                                    <!-- Modal "Ver" -->
+
+                                    <div class="modal fade text-start" id="modalVer-@m.InformeID" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalVerLabel-@m.InformeID" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header justify-content-between bg-primary">
+                                                    <h5 class="modal-title text-white dark__text-gray-1100" id="modalVerLabel-@m.InformeID">Detalles Informe Tecnico </h5>
+                                                    <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                                        <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div class="card-body p-4">
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-id">ID Informe</label>
+                                                            <input class="form-control" id="modal-id" type="text" value="@m.InformeID" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-nombre">Titulo</label>
+                                                            <input class="form-control" id="modal-nombre" type="text" value="@m.Titulo" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-descripcion">Fecha solicitada</label>
+                                                            <input class="form-control" id="modal-descripcion" type="text" value="@m.Fecha_Solicitud" readonly>
+                                                        </div>
+
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-codigo">Fecha Informe</label>
+                                                            <input class="form-control" id="modal-codigo" type="text" value="@m.Fecha_Informe" readonly>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-stock">Diagnostico</label>
+                                                            <input class="form-control" id="modal-stock" type="text" value="@m.Diagnostico" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-imagen">Solucion</label>
+                                                            <input class="form-control" id="modal-imagen" type="text" value="@m.Solucion_Primaria" readonly>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Area</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Area != null ? m.Area.Nombre_Area : "Area no disponible")" readonly>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Sede</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Area != null ? m.Sede.Nombre_Sede : "Sede no disponible")" readonly>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Tipo Equipo</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Tipo_Equipo != null ? m.Tipo_Equipo.Nombre : "Tipo Equipo no disponible")" readonly>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Equipo</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Equipo != null ? m.Equipo.Nombre_Equipo : "Equipo no disponible")" readonly>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Fallas Reportadas</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Falla != null ? m.Falla.Nombre_Falla : "Falla no disponible")" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Otras Actividades</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.O_Actividades != null ? m.O_Actividades.Nombre_O_Actividad : "Actividad no disponible")" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Estado:</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Estados != null ? m.Estados.Nombre_Estado : "Estado no disponible")" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fin Modal "Ver" -->
+
+                                    <!-- Botón "Editar" -->
+                                    <a href="~/Informe/AgregarEditar/@m.InformeID" class="btn btn-phoenix-warning me-1 mb-1" title="Editar">
+                                        <span class="text" data-feather="edit" style="height: 15px; width: 15px;"></span>
+                                    </a>
+
+                                    <!-- Botón "Eliminar" -->
+                                    <button class="btn btn-phoenix-danger me-1 mb-1" type="button" data-bs-toggle="modal" data-bs-target="#modalEliminar" title=Eliminar data-url="Eliminar/@m.InformeID">
+                                        <span class="text" data-feather="trash-2" style="height: 15px; width: 15px;"></span>
+                                    </button>
+
+
+                                    <!-- Modal de confirmación de eliminación -->
+                                    <div class="modal fade text-start" id="modalEliminar" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalEliminarLabel" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header justify-content-between bg-primary">
+                                                    <h5 class="modal-title text-white dark__text-gray-1100" id="modalEliminarLabel">Confirmar Eliminación</h5>
+                                                    <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                                        <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div class="card-body p-4">
+                                                    <div class="mb-3">
+                                                        <label class="modal-title text-white dark__text-gray-1100"><h5>¿Está seguro de eliminar el registro?</h5></label>
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <a id="confirmDeleteButton" href="#" class="btn btn-phoenix-primary me-1 mb-1">Eliminar</a>
+                                                        <button class="btn btn-phoenix-danger me-1 mb-1" type="button" data-bs-dismiss="modal">Cancelar</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            @*</tr>*@
+
+                            }
+                        </tbody>
+                </table>
+            </div>
+
+            <!--Paginación -->
+            <div class="d-flex flex-between-center pt-3">
+                <div class="pagination"></div>
+                <p class="mb-0 fs-9">
+                    <span id="list-info" class="d-none d-sm-inline-block"><span class="text-body-tertiary"></span></span>
+                </p>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
+<script>
+    // Configuración de List.js con paginación
+    const options = {
+        valueNames: ['name', 'email', 'age'], // Nombres de las columnas
+        page: 20, // Número de elementos por página
+        pagination: {
+            innerWindow: 1,
+            outerWindow: 1,
+            left: 0,
+            right: 0,
+            paginationClass: "pagination",
+        }
+    };
+    const userList = new List('tableExample3', options);
+
+    // Función para actualizar la información de paginación
+    function updatePaginationInfo() {
+        const pageInfo = document.getElementById('list-info');
+        const totalItems = userList.size();
+        const visibleItems = userList.visibleItems.length;
+        const page = userList.page;
+        const totalPages = userList.pages;
+
+        const start = (page * options.page) - options.page + 1;
+        const end = Math.min(page * options.page, totalItems);
+
+        pageInfo.innerHTML = `Filas ${visibleItems} <span class="text-body-tertiary"> Total </span>${totalItems}`;
+
+        feather.replace(); // Reemplaza los iconos de Feather
+        applyDeleteEvent(); // Aplica eventos de eliminar
+        applyStockStyles(); // Aplica estilos de stock
+        applyStatusStyles(); // Aplica estilos de estado
+
+    }
+
+    // Función para agregar eventos de eliminación
+    function applyDeleteEvent() {
+        document.querySelectorAll('.btn-phoenix-danger').forEach(button => {
+            button.addEventListener('click', function () {
+                const url = this.getAttribute('data-url');
+                document.getElementById('confirmDeleteButton').setAttribute('href', url);
+            });
+        });
+    }
+
+    // Función para aplicar estilos a los números de stock
+    function applyStockStyles() {
+        var stockNumbers = document.querySelectorAll('#tableExample3 tbody .stock-number');
+        stockNumbers.forEach(function (stockNumber) {
+            var stockValue = parseInt(stockNumber.textContent.trim());
+            if (stockValue <= 10) {
+                stockNumber.classList.add('low-stock');
+            } else {
+                stockNumber.classList.remove('low-stock');
+            }
+        });
+    }
+
+    // Función para aplicar estilos a los estados
+    function applyStatusStyles() {
+        var statusCells = document.querySelectorAll('#tableExample3 tbody .stock-estado');
+        statusCells.forEach(function (cell) {
+            var stateValue = cell.textContent.trim();
+            if (stateValue === "Inactivo") {
+                cell.classList.add('inactivo');
+            } else {
+                cell.classList.remove('inactivo');
+            }
+        });
+    }
+
+
+
+    // Evento que se ejecuta cuando la lista se actualiza
+    userList.on('updated', function () {
+        updatePaginationInfo();
+        applyDeleteEvent();
+        applyStockStyles();
+        applyStatusStyles();
+    });
+
+    // Llama a la función de actualización de paginación al cargar la página
+    updatePaginationInfo();
+
+
+
+    // Aplica eventos y estilos al cargar la página
+    document.addEventListener('DOMContentLoaded', function () {
+        var deleteButtons = document.querySelectorAll('button[data-bs-target="#modalEliminar"]');
+        deleteButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var url = this.getAttribute('data-url');
+                document.getElementById('confirmDeleteButton').setAttribute('href', url);
+            });
+        });
+
+        applyStockStyles();
+        applyStatusStyles();
+
+    });
+
+
+    // Función para filtrar por categoría
+    function filterByCategory() {
+        var filter = document.getElementById("categoryFilter").value.toLowerCase();
+        var table = document.getElementById("tableExample3");
+        var rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+        for (var i = 0; i < rows.length; i++) {
+            var categoryCell = rows[i].getElementsByTagName("td")[9];
+            if (categoryCell) {
+                var category = categoryCell.textContent || categoryCell.innerText;
+                if (filter === "" || category.toLowerCase().indexOf(filter) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+
+
+</script>
+
+
+<style>
+    .stock-number.low-stock {
+        color: red;
+    }
+
+    .stock-estado.inactivo {
+        color: red;
+    }
+</style>
+
+
+<script>
+    //Generar codigo de barras modeel
+    function generateBarcode(code, elementId) {
+        if (code) {
+            JsBarcode(`#${elementId}`, code, {
+                format: "CODE128",
+                lineColor: "#0aa",
+                width: 2,
+                height: 100,
+                displayValue: true
+            });
+        } else {
+            alert("Por favor, introduce un código válido.");
+        }
+    }
+
+    //Imprimir codigo de barras model
+    function printBarcode(elementId) {
+        console.log("ID recibido para impresión:", elementId);
+        let svgElement = document.getElementById(elementId);
+
+        if (!svgElement) {
+            alert("No se encontró el código de barras para imprimir.");
+            return;
+        }
+
+        try {
+            let serializer = new XMLSerializer();
+            let svgString = serializer.serializeToString(svgElement);
+            console.log("SVG serializado:", svgString);
+
+            let img = new Image();
+            img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+            console.log("Imagen base64 creada.");
+
+            img.onload = function () {
+                let printWindow = window.open('', '', 'height=600,width=800');
+                printWindow.document.open();
+                printWindow.document.write('<html><head><title>Imprimir Código de Barras</title>');
+                printWindow.document.write('<style>');
+                printWindow.document.write('img { width: 25%; height: auto; margin: 0 auto; display: block; }');
+                printWindow.document.write('</style>');
+                printWindow.document.write('</head><body>');
+                printWindow.document.write('<img src="' + img.src + '"/>');
+                printWindow.document.write('</body></html>');
+                printWindow.document.close();
+
+                printWindow.onload = function () {
+                    printWindow.print();
+                };
+            };
+
+            img.onerror = function () {
+                alert("Ocurrió un error al cargar la imagen del código de barras.");
+            };
+        } catch (error) {
+            console.error("Error durante la serialización o conversión:", error);
+            alert("Ocurrió un error durante el proceso.");
+        }
+    }
+
+
+
+
+</script>
+
+
+
+
+</body >

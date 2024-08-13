@@ -1,7 +1,95 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Referer of a Website - Apache ECharts Demo</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow-none border my-4">
+                <div class="card-header p-4 border-bottom bg-body">
+                </div>
+                <div id="chart-container1" style="width: 100%; height: 500px;"></div>
+            </div>
+            <div class="card shadow-none border my-4">
+                <div class="card-header p-4 border-bottom bg-body">
+                </div>
+                <div id="chart-container2" style="width: 100%; height: 500px;"></div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card shadow-none border my-4">
+                <div class="card-header p-4 border-bottom bg-body">
+                </div>
+                <div id="chart-container3" style="width: 100%; height: 500px;"></div>
+            </div>
+            <div class="card shadow-none border my-4">
+                <div class="card-header p-4 border-bottom bg-body">
+                </div>
+                <div id="chart-container4" style="width: 100%; height: 500px;"></div>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://fastly.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+
+    <script>
+        function initChart(containerId) {
+            var dom = document.getElementById(containerId);
+            var myChart = echarts.init(dom);
+
+            var option = {
+                title: {
+                    text: 'Referer of a Website',
+                    subtext: 'Fake Data',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left'
+                },
+                series: [
+                    {
+                        name: 'Access From',
+                        type: 'pie',
+                        radius: '50%',
+                        data: [
+                            { value: 1048, name: 'Search Engine' },
+                            { value: 735, name: 'Direct' },
+                            { value: 580, name: 'Email' },
+                            { value: 484, name: 'Union Ads' },
+                            { value: 300, name: 'Video Ads' }
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+
+            window.addEventListener('resize', function () {
+                myChart.resize();
+            });
+        }
+
+        initChart('chart-container1');
+        initChart('chart-container2');
+        initChart('chart-container3');
+        initChart('chart-container4');
+    </script>
+</body>
+</html>

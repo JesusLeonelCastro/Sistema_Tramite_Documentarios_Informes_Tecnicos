@@ -4,7 +4,9 @@ namespace Munipocollay_InformesTecnicos.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     public partial class Estados
     {
@@ -25,5 +27,118 @@ namespace Munipocollay_InformesTecnicos.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Informes> Informes { get; set; }
+
+        //Listar_Estado
+        public List<Estados> Listar()
+        {
+            var ObjEstado = new List<Estados>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    ObjEstado = db.Estados.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en Listar(): " + ex.Message);
+                throw;
+            }
+            return ObjEstado;
+        }
+
+        //Buscar_Estado
+        public List<Estados> Buscar(string criterio)
+        {
+            var ObjEstado = new List<Estados>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    ObjEstado = db.Estados.
+                        Where(x => x.Nombre_Estado.Contains(criterio)).ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+            return ObjEstado;
+
+        }
+
+        // Obtener_Estado
+        public Estados Obtener(int id)
+        {
+
+            var ObjEstado = new Estados();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    ObjEstado = db.Estados.
+                        Where(x => x.EstadoID == id).SingleOrDefault();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+            return ObjEstado;
+
+        }
+
+        //Agregar_Estado
+        public void Guardar()
+        {
+
+            try
+            {
+                using (var db = new Model1())
+                {
+                    if (this.EstadoID > 0)
+                    {
+                        db.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Entry(this).State = EntityState.Added;
+                        db.SaveChanges();
+                    }
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
+        //Eliminar_Estado
+
+        public void Eliminar()
+        {
+
+            try
+            {
+                using (var db = new Model1())
+                {
+                    db.Entry(this).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

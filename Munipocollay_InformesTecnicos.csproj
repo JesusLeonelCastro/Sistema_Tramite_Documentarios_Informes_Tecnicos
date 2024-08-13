@@ -131,6 +131,7 @@
     <Content Include="Assets\js\phoenix.js" />
     <Content Include="Assets\js\polyfill.min.js" />
     <Content Include="Assets\js\popper.min.js" />
+    <Content Include="Assets\js\prueba.js" />
     <Content Include="Assets\js\simplebar.min.js" />
     <Content Include="Assets\Producto.html" />
     <Content Include="Content\Site.css" />
@@ -140,8 +141,11 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\EquipoController.cs" />
+    <Compile Include="Controllers\EstadosController.cs" />
     <Compile Include="Controllers\FallaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InformeController.cs" />
     <Compile Include="Controllers\OtrasController.cs" />
     <Compile Include="Controllers\SedeController.cs" />
     <Compile Include="Controllers\Tipo_EquipoController.cs" />
@@ -176,6 +180,12 @@
     <Content Include="Views\Falla\AgregarEditar.cshtml" />
     <Content Include="Views\Otras\Index.cshtml" />
     <Content Include="Views\Otras\AgregarEditar.cshtml" />
+    <Content Include="Views\Estados\Index.cshtml" />
+    <Content Include="Views\Estados\AgregarEditar.cshtml" />
+    <Content Include="Views\Equipo\Index.cshtml" />
+    <Content Include="Views\Equipo\AgregarEditar.cshtml" />
+    <Content Include="Views\Informe\Index.cshtml" />
+    <Content Include="Views\Informe\AgregarEditar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
