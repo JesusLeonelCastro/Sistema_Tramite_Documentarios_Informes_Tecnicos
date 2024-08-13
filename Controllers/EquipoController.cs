@@ -13,9 +13,10 @@ namespace Munipocollay_InformesTecnicos.Controllers
 
 
 
+
         public ActionResult Index(string criterio)
         {
-            
+         
 
             if (criterio == null || criterio == "")
             {
@@ -47,6 +48,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
         //Editar_Equipo
         public ActionResult AgregarEditar(int id = 0)
         {
+
 
             return View(
                 id == 0 ? new Equipo()

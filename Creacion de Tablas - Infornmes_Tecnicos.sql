@@ -69,7 +69,9 @@ CREATE TABLE Equipo (
     Sub_Tipo NVARCHAR(100),
     Modelo NVARCHAR(100),
     Marca NVARCHAR(100),
-    Codigo_Interno NVARCHAR(100)
+    Codigo_Interno NVARCHAR(100),
+	Observaciones NVARCHAR(100),
+	Ingreso date
 );
 
 -- Crear la tabla Informes con las relaciones

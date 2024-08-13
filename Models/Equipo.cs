@@ -48,6 +48,8 @@ namespace Munipocollay_InformesTecnicos.Models
 
 
 
+
+
         //Listar_Estado
         public List<Equipo> Listar()
         {
@@ -78,6 +80,7 @@ namespace Munipocollay_InformesTecnicos.Models
                 using (var db = new Model1())
                 {
                     ObjEquipo = db.Equipo.
+
                         Where(x => x.Nombre_Equipo.Contains(criterio)).ToList();
                 }
 

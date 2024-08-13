@@ -32,7 +32,7 @@
 <div class="card shadow-none border my-4" data-component-card="data-component-card">
     <div class="card-header p-4 border-bottom bg-body">
 
-        <center><h2>ARTICULOS</h2></center>
+        <center><h2>LISTA INFORMES TECNICOS</h2></center>
     </div>
     <div class="card-body p-4">
         <!--Contenerdor Card-->
@@ -91,13 +91,13 @@
 
                         @foreach (var m in Model)
                         {
-                            @*<tr class="table-row" data-category="@m.Area?.Nombre_Area?.ToLower() ?? " Area no disponible"">
+                            <tr class="table-row" data-category="@m.Area?.Nombre_Area?.ToLower() ?? " Area no disponible"">
                             <tr class="table-row" data-category="@m.Sede?.Nombre_Sede?.ToLower() ?? " Sede no disponible"">
                             <tr class="table-row" data-category="@m.Tipo_Equipo?.Nombre?.ToLower() ?? " Tipo Equipo no disponible"">
                             <tr class="table-row" data-category="@m.Equipo?.Nombre_Equipo?.ToLower() ?? " Esquipo no disponible"">
                             <tr class="table-row" data-category="@m.Falla?.Nombre_Falla?.ToLower() ?? " Falla no disponible"">
                             <tr class="table-row" data-category="@m.O_Actividades?.Nombre_O_Actividades?.ToLower() ?? " Actividad no disponible"">
-                            <tr class="table-row" data-category="@m.Estados?.Nombre_Estado?.ToLower() ?? " Estao no disponible"">*@
+                            <tr class="table-row" data-category="@m.Estados?.Nombre_Estado?.ToLower() ?? " Estao no disponible"">
 
                                 <td class="align-middle ps-3 name">@m.InformeID</td>
                                 <td class="align-middle email">@m.Titulo</td>
@@ -140,49 +140,49 @@
                                     }
                                 </td>
 
-                                @*<td class="align-middle email category-column">
-                                    @if (m.Equipo != null)
-                                    {
-                                        @m.Equipo.Nombre_Equipo
-                                    }
-                                    else
-                                    {
-                                        <span>Equipo no disponible</span>
-                                    }
-                                </td>
+                                                    @*<td class="align-middle email category-column">
+                                        @if (m.Equipo != null)
+                                        {
+                                            @m.Equipo.Nombre_Equipo
+                                        }
+                                        else
+                                        {
+                                            <span>Equipo no disponible</span>
+                                        }
+                                    </td>
 
-                                <td class="align-middle email category-column">
-                                    @if (m.Falla != null)
-                                    {
-                                        @m.Falla.Nombre_Falla
-                                    }
-                                    else
-                                    {
-                                        <span>Falla no disponible</span>
-                                    }
-                                </td>
+                                    <td class="align-middle email category-column">
+                                        @if (m.Falla != null)
+                                        {
+                                            @m.Falla.Nombre_Falla
+                                        }
+                                        else
+                                        {
+                                            <span>Falla no disponible</span>
+                                        }
+                                    </td>
 
-                                <td class="align-middle email category-column">
-                                    @if (m.O_Actividades != null)
-                                    {
-                                        @m.O_Actividades.Nombre_O_Actividad
-                                    }
-                                    else
-                                    {
-                                        <span>Actividades no disponible</span>
-                                    }
-                                </td>
+                                    <td class="align-middle email category-column">
+                                        @if (m.O_Actividades != null)
+                                        {
+                                            @m.O_Actividades.Nombre_O_Actividad
+                                        }
+                                        else
+                                        {
+                                            <span>Actividades no disponible</span>
+                                        }
+                                    </td>
 
-                                <td class="align-middle email category-column">
-                                    @if (m.Estados != null)
-                                    {
-                                        @m.Estados.Nombre_Estado
-                                    }
-                                    else
-                                    {
-                                        <span>Estado no disponible</span>
-                                    }
-                                </td>*@
+                                    <td class="align-middle email category-column">
+                                        @if (m.Estados != null)
+                                        {
+                                            @m.Estados.Nombre_Estado
+                                        }
+                                        else
+                                        {
+                                            <span>Estado no disponible</span>
+                                        }
+                                    </td>*@
 
                                 <td class="align-middle white-space-nowrap text-center pe-0">
 
@@ -275,7 +275,6 @@
                                         </div>
                                     </div>
                                     <!-- Fin Modal "Ver" -->
-
                                     <!-- Botón "Editar" -->
                                     <a href="~/Informe/AgregarEditar/@m.InformeID" class="btn btn-phoenix-warning me-1 mb-1" title="Editar">
                                         <span class="text" data-feather="edit" style="height: 15px; width: 15px;"></span>
@@ -314,20 +313,26 @@
                                     </div>
 
                                 </td>
-                            @*</tr>*@
+                            </tr>
+                            </tr>
+                            </tr>
+                            </tr>
+                            </tr>
+                            </tr>
+                            </tr>
 
-                            }
-                        </tbody>
+                        }
+                    </tbody>
                 </table>
             </div>
 
             <!--Paginación -->
-            <div class="d-flex flex-between-center pt-3">
+            <!--<div class="d-flex flex-between-center pt-3">
                 <div class="pagination"></div>
                 <p class="mb-0 fs-9">
                     <span id="list-info" class="d-none d-sm-inline-block"><span class="text-body-tertiary"></span></span>
                 </p>
-            </div>
+            </div>-->
 
 
 

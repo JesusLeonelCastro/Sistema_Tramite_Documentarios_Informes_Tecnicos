@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "AgregarEditar";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<Munipocollay_InformesTecnicos.Models.Tipo_Equipo> tipo_equipo = ViewBag.Tipo3;
 
 }
 
@@ -40,17 +39,7 @@
                         @Html.TextBoxFor(x => x.Tipo, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Descripción del Tipo de equipo" })
                     </div>
 
-                    @*<div class="form-group mb-3">
-                        @Html.Label("Tipo de Equipo:", new { @class = "form-label" })
-                        <select name="Tipo_EquipoID" class="form-select">
-                            <option value="">--Seleccione--</option>
-                            @foreach (var t in tipo_equipo)
-                            {
-                                <option value="@t.Tipo_EquipoID" @(Model.Tipo_EquipoID == t.Tipo_EquipoID ? "selected" : "")>@t.Nombre</option>
-                            }
-                        </select>
-                        @Html.ValidationMessageFor(x => x.Tipo_EquipoID, null, new { @class = "label label-danger" })
-                    </div>*@
+
 
                     <div class="mb-1">
                         @Html.Label("Nombre equipo:", new { @class = "form-label mb-0" })
@@ -70,6 +59,14 @@
                     <div class="mb-1">
                         @Html.Label("Modelo equipo:", new { @class = "form-label mb-0" })
                         @Html.TextBoxFor(x => x.Modelo, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Modelo del equipo", required = "required" })
+                        <div class="invalid-feedback">
+                            Campo obligatorio*
+                        </div>
+                    </div>
+
+                    <div class="mb-1">
+                        @Html.Label("Color Equipo:", new { @class = "form-label mb-0" })
+                        @Html.TextBoxFor(x => x.Color, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Color del equipo", required = "required" })
                         <div class="invalid-feedback">
                             Campo obligatorio*
                         </div>
@@ -107,6 +104,8 @@
                         @Html.Label("Observaciones Equipo:", new { @class = "form-label mb-0" })
                         @Html.TextBoxFor(x => x.Observaciones, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese observaciones del equipo" })
                     </div>
+
+                    
                 </div>
             </div>
            
