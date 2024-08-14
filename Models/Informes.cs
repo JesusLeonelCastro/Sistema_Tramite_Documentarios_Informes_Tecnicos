@@ -60,6 +60,28 @@ namespace Munipocollay_InformesTecnicos.Models
 
         public virtual Usuario Usuario { get; set; }
 
+        public string Nombre_Equipos { get; set; }
+
+        public string Tipo { get; set; }
+
+        public string Color { get; set; }
+
+        public string Serie { get; set; }
+
+        public string Cod_Patrimonial { get; set; }
+
+        public string Sub_Tipo { get; set; }
+
+        public string Modelo { get; set; }
+
+        public string Marca { get; set; }
+
+        public string Codigo_Interno { get; set; }
+
+        public string Observaciones { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? Ingreso { get; set; }
 
         //Listar_Articulo      "Poner la relacion de 2 o 3 tablas"
         public List<Informes> Listar()

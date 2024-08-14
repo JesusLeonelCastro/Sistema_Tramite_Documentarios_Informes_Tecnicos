@@ -11,8 +11,6 @@ namespace Munipocollay_InformesTecnicos.Controllers
     {
         private Informes objinformes = new Informes();
 
-        private Area objarea = new Area();
-
         private Falla objfalla = new Falla();
 
         private O_Actividades objo_Actividades = new O_Actividades();
@@ -25,7 +23,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
 
         private Equipo objequipo = new Equipo();
 
-
+        private Area objarea = new Area();
 
         public ActionResult Index(string criterio)
         {
@@ -51,12 +49,11 @@ namespace Munipocollay_InformesTecnicos.Controllers
             ViewBag.equipo = equipo;
 
 
-
-
-
             if (criterio == null || criterio == "")
             {
                 return View(objinformes.Listar());
+
+                
             }
             else
             {
@@ -100,7 +97,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
                 // Si es un nuevo informe, asigna el valor predeterminado al título
                 model = new Informes
                 {
-                    Titulo = "FORMATO DE INFORME TECNICO DE SOPORTE INFORMATICO 2024 - "
+                    Titulo = "FORMATO DE INFORME TECNICO DE SOPORTE INFORMATICO 2024"
                 };
             }
             else
