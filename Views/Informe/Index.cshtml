@@ -178,193 +178,269 @@
                                         }
                                     </td>*@
 
-                            <td class="align-middle white-space-nowrap text-center pe-0">
+                                <td class="align-middle white-space-nowrap text-center pe-0">
 
-                                <!-- Botón "Pdf" -->
-                                <button class="btn btn-subtle-danger me-1 mb-1" type="button" data-bs-toggle="modal" title="Ver" data-bs-target="">
-                                    <span class="text" data-feather="file-text" style="height: 15px; width: 15px;"></span>
-                                </button>
-
-
-                                <!-- Botón "Ver" -->
-                                <button class="btn btn-phoenix-info me-1 mb-1" type="button" data-bs-toggle="modal" title="Ver" data-bs-target="#modalVer-@m.InformeID">
-                                    <span class="text" data-feather="eye" style="height: 15px; width: 15px;"></span>
-                                </button>
-
-                                <!-- Modal "Ver" -->
-
-                                <div class="modal fade text-start" id="modalVer-@m.InformeID" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalVerLabel-@m.InformeID" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header justify-content-between bg-primary">
-                                                <h5 class="modal-title text-white dark__text-gray-1100" id="modalVerLabel-@m.InformeID">Detalles Informe Tecnico </h5>
-                                                <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-                                                        <path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div class="card-body p-4">
-                                                <div class="row">
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-id">ID Informe</label>
-                                                        <input class="form-control" id="modal-id" type="text" value="@m.InformeID" readonly>
-                                                    </div>
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-nombre">Titulo</label>
-                                                        <input class="form-control" id="modal-nombre" type="text" value="@m.Titulo" readonly>
-                                                    </div>
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-descripcion">Fecha solicitada</label>
-                                                        <input class="form-control" id="modal-descripcion" type="text" value="@(m.Fecha_Solicitud.HasValue ? m.Fecha_Solicitud.Value.ToString("yyyy-MM-dd") : string.Empty)" readonly>
-                                                    </div>
-
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-descripcion">Fecha Informe</label>
-                                                        <input class="form-control" id="modal-descripcion" type="text" value="@(m.Fecha_Informe.HasValue ? m.Fecha_Informe.Value.ToString("yyyy-MM-dd") : string.Empty)" readonly>
-                                                    </div>
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-diagnostico">Diagnóstico</label>
-                                                        <textarea class="form-control" id="modal-diagnostico" rows="4" readonly>@m.Diagnostico</textarea>
-                                                    </div>
-
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-solucion">Solución</label>
-                                                        <textarea class="form-control" id="modal-solucion" rows="4" readonly>@m.Solucion_Primaria</textarea>
-                                                    </div>
-
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-categoria">Area</label>
-                                                        <input class="form-control" id="modal-categoria" type="text" value="@(m.Area != null ? m.Area.Nombre_Area : "Area no disponible")" readonly>
-                                                    </div>
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-categoria">Sede</label>
-                                                        <input class="form-control" id="modal-categoria" type="text" value="@(m.Area != null ? m.Sede.Nombre_Sede : "Sede no disponible")" readonly>
-                                                    </div>
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-categoria">Tipo Equipo</label>
-                                                        <input class="form-control" id="modal-categoria" type="text" value="@(m.Tipo_Equipo != null ? m.Tipo_Equipo.Nombre : "Tipo Equipo no disponible")" readonly>
-                                                    </div>
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-categoria">Fallas Reportadas</label>
-                                                        <input class="form-control" id="modal-categoria" type="text" value="@(m.Falla != null ? m.Falla.Nombre_Falla : "Falla no disponible")" readonly>
-                                                    </div>
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-categoria">Otras Actividades</label>
-                                                        <input class="form-control" id="modal-categoria" type="text" value="@(m.O_Actividades != null ? m.O_Actividades.Nombre_O_Actividad : "Actividad no disponible")" readonly>
-                                                    </div>
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-categoria">Estado:</label>
-                                                        <input class="form-control" id="modal-categoria" type="text" value="@(m.Estados != null ? m.Estados.Nombre_Estado : "Estado no disponible")" readonly>
-                                                    </div>
-
-                                                    <hr />
-                                                    <h5>Detalle Equipo</h5>
-                                                    <br />
-                                                    <br />
-                                                    <!-- A partir de aquí comienza la tercera columna -->
-                                                    <div class="col-md-4 mb-3">
-                                                        <label class="form-label" for="modal-nombre-equipos">Nombre Equipo:</label>
-                                                        <input class="form-control" id="modal-nombre-equipos" type="text" value="@m.Nombre_Equipos" readonly>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <label class="form-label" for="modal-tipo">Tipo Equipo:</label>
-                                                        <input class="form-control" id="modal-tipo" type="text" value="@m.Tipo" readonly>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <label class="form-label" for="modal-color">Color Equipo:</label>
-                                                        <input class="form-control" id="modal-color" type="text" value="@m.Color" readonly>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <label class="form-label" for="modal-serie">Numero Serie:</label>
-                                                        <input class="form-control" id="modal-serie" type="text" value="@m.Serie" readonly>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <label class="form-label" for="modal-cod-patrimonial">Codogo Patrimonial:</label>
-                                                        <input class="form-control" id="modal-cod-patrimonial" type="text" value="@m.Cod_Patrimonial" readonly>
-                                                    </div>
-
-                                                    <div class="col-md-4 mb-3">
-                                                        <label class="form-label" for="modal-descripcion">Fecha Ingreso Equipo:</label>
-                                                        <input class="form-control" id="modal-descripcion" type="text" value="@(m.Ingreso.HasValue ? m.Ingreso.Value.ToString("yyyy-MM-dd") : string.Empty)" readonly>
-                                                    </div>
+                                    <!-- Botón "Pdf" -->
+                                    <button class="btn btn-subtle-danger me-1 mb-1" type="button" data-bs-toggle="modal" title="Ver" data-bs-target="">
+                                        <span class="text" data-feather="file-text" style="height: 15px; width: 15px;"></span>
+                                    </button>
 
 
+                                    <!-- Botón "Ver" -->
+                                    <button class="btn btn-phoenix-info me-1 mb-1" type="button" data-bs-toggle="modal" title="Ver" data-bs-target="#modalVer-@m.InformeID">
+                                        <span class="text" data-feather="eye" style="height: 15px; width: 15px;"></span>
+                                    </button>
 
-                                                    <div class="col-md-4 mb-3">
-                                                        <label class="form-label" for="modal-modelo">Numero Modelo Equipo:</label>
-                                                        <input class="form-control" id="modal-modelo" type="text" value="@m.Modelo" readonly>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <label class="form-label" for="modal-marca">Marca Equipo:</label>
-                                                        <input class="form-control" id="modal-marca" type="text" value="@m.Marca" readonly>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <label class="form-label" for="modal-codigo-interno">Codigo Interno Equipo:</label>
-                                                        <input class="form-control" id="modal-codigo-interno" type="text" value="@m.Codigo_Interno" readonly>
-                                                    </div>
-                                                  
+                                    <!-- Modal "Ver" -->
 
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-sub-tipo">Observaciones Equipo:</label>
-                                                        <textarea class="form-control" id="modal-sub-tipo" rows="3" readonly>@m.Observaciones</textarea>
-                                                    </div>
+                                    <div class="modal fade text-start" id="modalVer-@m.InformeID" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalVerLabel-@m.InformeID" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header justify-content-between bg-primary">
+                                                    <h5 class="modal-title text-white dark__text-gray-1100" id="modalVerLabel-@m.InformeID">Detalles Informe Tecnico </h5>
+                                                    <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                                        <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div class="card-body p-4">
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-id">ID Informe</label>
+                                                            <input class="form-control" id="modal-id" type="text" value="@m.InformeID" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-nombre">Titulo</label>
+                                                            <input class="form-control" id="modal-nombre" type="text" value="@m.Titulo" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-descripcion">Fecha solicitada</label>
+                                                            <input class="form-control" id="modal-descripcion" type="text" value="@(m.Fecha_Solicitud.HasValue ? m.Fecha_Solicitud.Value.ToString("yyyy-MM-dd") : string.Empty)" readonly>
+                                                        </div>
 
-                                                    <div class="col-md-6 mb-3">
-                                                        <label class="form-label" for="modal-sub-tipo">Mantenimiento (referencia):</label>
-                                                        <textarea class="form-control" id="modal-sub-tipo" rows="3" readonly>@m.Sub_Tipo</textarea>
-                                                    </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-descripcion">Fecha Informe</label>
+                                                            <input class="form-control" id="modal-descripcion" type="text" value="@(m.Fecha_Informe.HasValue ? m.Fecha_Informe.Value.ToString("yyyy-MM-dd") : string.Empty)" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-diagnostico">Diagnóstico</label>
+                                                            <textarea class="form-control" id="modal-diagnostico" rows="3" readonly>@m.Diagnostico</textarea>
+                                                        </div>
 
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-solucion">Solución</label>
+                                                            <textarea class="form-control" id="modal-solucion" rows="3" readonly>@m.Solucion_Primaria</textarea>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Area</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Area != null ? m.Area.Nombre_Area : "Area no disponible")" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Sede</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Area != null ? m.Sede.Nombre_Sede : "Sede no disponible")" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Tipo Equipo</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Tipo_Equipo != null ? m.Tipo_Equipo.Nombre : "Tipo Equipo no disponible")" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Fallas Reportadas</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Falla != null ? m.Falla.Nombre_Falla : "Falla no disponible")" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Otras Actividades</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.O_Actividades != null ? m.O_Actividades.Nombre_O_Actividad : "Actividad no disponible")" readonly>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-categoria">Estado:</label>
+                                                            <input class="form-control" id="modal-categoria" type="text" value="@(m.Estados != null ? m.Estados.Nombre_Estado : "Estado no disponible")" readonly>
+                                                        </div>
+
+                                                        <hr />
+                                                        <h5>Detalle Equipo</h5>
+                                                        <br />
+                                                        <br />
+                                                        <!-- A partir de aquí comienza la tercera columna -->
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label" for="modal-nombre-equipos">Nombre Equipo:</label>
+                                                            <input class="form-control" id="modal-nombre-equipos" type="text" value="@m.Nombre_Equipos" readonly>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label" for="modal-tipo">Tipo Equipo:</label>
+                                                            <input class="form-control" id="modal-tipo" type="text" value="@m.Tipo" readonly>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label" for="modal-color">Color Equipo:</label>
+                                                            <input class="form-control" id="modal-color" type="text" value="@m.Color" readonly>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label" for="modal-serie">Numero Serie:</label>
+                                                            <input class="form-control" id="modal-serie" type="text" value="@m.Serie" readonly>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label" for="modal-cod-patrimonial">Codogo Patrimonial:</label>
+                                                            <input class="form-control" id="modal-cod-patrimonial" type="text" value="@m.Cod_Patrimonial" readonly>
+                                                        </div>
+
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label" for="modal-descripcion">Fecha Ingreso Equipo:</label>
+                                                            <input class="form-control" id="modal-descripcion" type="text" value="@(m.Ingreso.HasValue ? m.Ingreso.Value.ToString("yyyy-MM-dd") : string.Empty)" readonly>
+                                                        </div>
+
+
+
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label" for="modal-modelo">Numero Modelo Equipo:</label>
+                                                            <input class="form-control" id="modal-modelo" type="text" value="@m.Modelo" readonly>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label" for="modal-marca">Marca Equipo:</label>
+                                                            <input class="form-control" id="modal-marca" type="text" value="@m.Marca" readonly>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label" for="modal-codigo-interno">Codigo Interno Equipo:</label>
+                                                            <input class="form-control" id="modal-codigo-interno" type="text" value="@m.Codigo_Interno" readonly>
+                                                        </div>
+
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-sub-tipo">Observaciones Equipo:</label>
+                                                            <textarea class="form-control" id="modal-sub-tipo" rows="3" readonly>@m.Observaciones</textarea>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="modal-sub-tipo">Mantenimiento (referencia):</label>
+                                                            <textarea class="form-control" id="modal-sub-tipo" rows="3" readonly>@m.Sub_Tipo</textarea>
+                                                        </div>
+
+
+
+                                                        <button class="btn btn-danger" id="downloadPDF-@m.InformeID">Descargar PDF</button>
+
+                                                        
+
+                                                        <script>
+                                                            document.getElementById("downloadPDF-@m.InformeID").addEventListener("click", function () {
+                                                                const { jsPDF } = window.jspdf;
+                                                                const doc = new jsPDF();
+
+                                                                doc.setFontSize(16);
+                                                                doc.setFont("helvetica", "bold");
+                                                                doc.text("DETALLE DE INFORME TÉCNICO", 105, 20, null, null, "center");
+
+                                                                doc.setLineWidth(0.5);
+                                                                doc.setDrawColor(25, 63, 127);
+                                                                doc.line(20, 25, 190, 25);
+
+                                                                doc.setFontSize(12);
+                                                                doc.setFont("helvetica", "normal");
+                                                                doc.setTextColor(0, 0, 0);
+                                                                let yPosition = 35;
+
+                                                                const informeData = [
+                                                                    `Título: @Html.Raw(@m.Titulo) - @m.InformeID`,
+                                                                    `Tipo Equipo: @Html.Raw(@m.Tipo_Equipo.Nombre)`,
+                                                                    `Area: @Html.Raw(@m.Area.Nombre_Area)`,
+                                                                    `Sede: @Html.Raw(@m.Sede.Nombre_Sede)`,
+                                                                    `Fallas Reportadas: @Html.Raw(@m.Falla.Nombre_Falla)`,
+                                                                    `Otras Actividades: @Html.Raw(@m.O_Actividades.Nombre_O_Actividad)`,
+                                                                    `Fecha Solicitada: @(m.Fecha_Solicitud.HasValue ? m.Fecha_Solicitud.Value.ToString("yyyy-MM-dd") : "No disponible")`,
+                                                                    `Fecha Informe: @(m.Fecha_Informe.HasValue ? m.Fecha_Informe.Value.ToString("yyyy-MM-dd") : "No disponible")`,
+                                                                    `Diagnóstico: @Html.Raw(@m.Diagnostico)`,
+                                                                    `Solución: @Html.Raw(@m.Solucion_Primaria)`
+                                                                ];
+
+                                                                informeData.forEach(line => {
+                                                                    doc.text(line, 20, yPosition);
+                                                                    yPosition += 8;
+                                                                });
+
+                                                                yPosition += 10;
+                                                                doc.setFont("helvetica", "bold");
+                                                                doc.text("DETALLE DEL EQUIPO", 105, yPosition, null, null, "center");
+
+                                                                yPosition += 5;
+                                                                doc.line(20, yPosition, 190, yPosition);
+
+                                                                yPosition += 10;
+                                                                const equipoData = [
+                                                                    `Nombre Equipo: @Html.Raw(@m.Nombre_Equipos)`,
+                                                                    `Tipo Equipo: @Html.Raw(@m.Tipo)`,
+                                                                    `Color Equipo: @Html.Raw(@m.Color)`,
+                                                                    `Número Serie: @Html.Raw(@m.Serie)`,
+                                                                    `Código Patrimonial: @Html.Raw(@m.Cod_Patrimonial)`,
+                                                                    `Fecha Ingreso Equipo: @(m.Ingreso.HasValue ? m.Ingreso.Value.ToString("yyyy-MM-dd") : "No disponible")`,
+                                                                    `Número Modelo: @Html.Raw(@m.Modelo)`,
+                                                                    `Marca: @Html.Raw(@m.Marca)`,
+                                                                    `Código Interno: @Html.Raw(@m.Codigo_Interno)`,
+                                                                    `Observaciones: @Html.Raw(@m.Observaciones)`,
+                                                                    `Mantenimiento: @Html.Raw(@m.Sub_Tipo)`
+                                                                ];
+
+                                                                doc.setFont("helvetica", "normal");
+
+                                                                equipoData.forEach(line => {
+                                                                    doc.text(line, 20, yPosition);
+                                                                    yPosition += 8;
+                                                                });
+
+
+                                                                // Generar y descargar el PDF
+                                                                    doc.save(`Informe-Tecnico-${'@m.InformeID'}.pdf`);
+                                                            });
+                                                        </script>
+
+                                                    </div>
 
                                                 </div>
 
+
+
                                             </div>
-
-
-
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Fin Modal "Ver" -->
-                                <!-- Botón "Editar" -->
-                                <a href="~/Informe/AgregarEditar/@m.InformeID" class="btn btn-phoenix-warning me-1 mb-1" title="Editar">
-                                    <span class="text" data-feather="edit" style="height: 15px; width: 15px;"></span>
-                                </a>
+                                    <!-- Fin Modal "Ver" -->
+                                    <!-- Botón "Editar" -->
+                                    <a href="~/Informe/AgregarEditar/@m.InformeID" class="btn btn-phoenix-warning me-1 mb-1" title="Editar">
+                                        <span class="text" data-feather="edit" style="height: 15px; width: 15px;"></span>
+                                    </a>
 
-                                <!-- Botón "Eliminar" -->
-                                <button class="btn btn-phoenix-danger me-1 mb-1" type="button" data-bs-toggle="modal" data-bs-target="#modalEliminar" title=Eliminar data-url="Eliminar/@m.InformeID">
-                                    <span class="text" data-feather="trash-2" style="height: 15px; width: 15px;"></span>
-                                </button>
+                                    <!-- Botón "Eliminar" -->
+                                    <button class="btn btn-phoenix-danger me-1 mb-1" type="button" data-bs-toggle="modal" data-bs-target="#modalEliminar" title=Eliminar data-url="Eliminar/@m.InformeID">
+                                        <span class="text" data-feather="trash-2" style="height: 15px; width: 15px;"></span>
+                                    </button>
 
 
-                                <!-- Modal de confirmación de eliminación -->
-                                <div class="modal fade text-start" id="modalEliminar" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalEliminarLabel" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header justify-content-between bg-primary">
-                                                <h5 class="modal-title text-white dark__text-gray-1100" id="modalEliminarLabel">Confirmar Eliminación</h5>
-                                                <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-                                                        <path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div class="card-body p-4">
-                                                <div class="mb-3">
-                                                    <label class="modal-title text-white dark__text-gray-1100"><h5>¿Está seguro de eliminar el registro?</h5></label>
+                                    <!-- Modal de confirmación de eliminación -->
+                                    <div class="modal fade text-start" id="modalEliminar" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalEliminarLabel" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header justify-content-between bg-primary">
+                                                    <h5 class="modal-title text-white dark__text-gray-1100" id="modalEliminarLabel">Confirmar Eliminación</h5>
+                                                    <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                                        <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+                                                            <path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
+                                                        </svg>
+                                                    </button>
                                                 </div>
-                                                <div class="d-flex justify-content-end">
-                                                    <a id="confirmDeleteButton" href="#" class="btn btn-phoenix-primary me-1 mb-1">Eliminar</a>
-                                                    <button class="btn btn-phoenix-danger me-1 mb-1" type="button" data-bs-dismiss="modal">Cancelar</button>
+                                                <div class="card-body p-4">
+                                                    <div class="mb-3">
+                                                        <label class="modal-title text-white dark__text-gray-1100"><h5>¿Está seguro de eliminar el registro?</h5></label>
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <a id="confirmDeleteButton" href="#" class="btn btn-phoenix-primary me-1 mb-1">Eliminar</a>
+                                                        <button class="btn btn-phoenix-danger me-1 mb-1" type="button" data-bs-dismiss="modal">Cancelar</button>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </td>
+                                </td>
                             </tr>
                             </tr>
                             </tr>
@@ -393,6 +469,7 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -476,6 +553,8 @@
 
 
 </script>
+
+
 
 
 </body >

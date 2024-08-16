@@ -69,6 +69,7 @@
                 </div>
 
                 <!--Radio Butto-->
+
                 <hr />
                 <div class="form-group mb-3">
                     @Html.Label("Falla:", new { @class = "form-label" })
@@ -117,7 +118,7 @@
                         Campo obligatorio*
                     </div>
                 </div>
-                
+
                 <div class="mb-1">
                     @Html.Label("Mantenimiento (referencia):", new { @class = "form-label mb-0" })
                     @Html.TextAreaFor(x => x.Sub_Tipo, new { @class = "form-control", id = "descripcionArea", placeholder = "Último mantenimiento, mes, día o año", rows = 4 })
@@ -126,117 +127,121 @@
             </div>
 
                 <!-- Column 2 -->
-        <div class="col-md-6">
-            <div class="form-group mb-3">
-                @Html.Label("Área:", new { @class = "form-label" })
-                <select name="AreaID" class="form-select">
-                    <option value="">--Seleccione--</option>
-                    @foreach (var t in area)
-                    {
-                        <option value="@t.AreaID" @(Model.AreaID == t.AreaID ? "selected" : "")>@t.Nombre_Area</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(x => x.AreaID, null, new { @class = "label label-danger" })
-            </div>
 
-            <div class="form-group mb-3">
-                @Html.Label("Sede:", new { @class = "form-label" })
-                <select name="SedeID" class="form-select">
-                    <option value="">--Seleccione--</option>
-                    @foreach (var t in sede)
-                    {
-                        <option value="@t.SedeID" @(Model.SedeID == t.SedeID ? "selected" : "")>@t.Nombre_Sede</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(x => x.SedeID, null, new { @class = "label label-danger" })
-            </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        @Html.Label("Área:", new { @class = "form-label" })
+                        <select name="AreaID" class="form-select">
+                            <option value="">--Seleccione--</option>
+                            @foreach (var t in area)
+                            {
+                                <option value="@t.AreaID" @(Model.AreaID == t.AreaID ? "selected" : "")>@t.Nombre_Area</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(x => x.AreaID, null, new { @class = "label label-danger" })
+                    </div>
 
-            <div class="form-group mb-3">
-                @Html.Label("Tipo de Equipo:", new { @class = "form-label" })
-                <select name="Tipo_EquipoID" class="form-select">
-                    <option value="">--Seleccione--</option>
-                    @foreach (var t in tipo_equipo)
-                    {
-                        <option value="@t.Tipo_EquipoID" @(Model.Tipo_EquipoID == t.Tipo_EquipoID ? "selected" : "")>@t.Nombre</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(x => x.Tipo_EquipoID, null, new { @class = "label label-danger" })
-            </div>
+                    <div class="form-group mb-3">
+                        @Html.Label("Sede:", new { @class = "form-label" })
+                        <select name="SedeID" class="form-select">
+                            <option value="">--Seleccione--</option>
+                            @foreach (var t in sede)
+                            {
+                                <option value="@t.SedeID" @(Model.SedeID == t.SedeID ? "selected" : "")>@t.Nombre_Sede</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(x => x.SedeID, null, new { @class = "label label-danger" })
+                    </div>
 
-            <div class="form-group mb-3">
-                @Html.Label("Estado:", new { @class = "form-label" })
-                <select name="EstadoID" class="form-select">
-                    <option value="">--Seleccione--</option>
-                    @foreach (var t in estado)
-                    {
-                        <option value="@t.EstadoID" @(Model.EstadoID == t.EstadoID ? "selected" : "")>@t.Nombre_Estado</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(x => x.EstadoID, null, new { @class = "label label-danger" })
-            </div>
+                    <div class="form-group mb-3">
+                        @Html.Label("Tipo de Equipo:", new { @class = "form-label" })
+                        <select name="Tipo_EquipoID" class="form-select">
+                            <option value="">--Seleccione--</option>
+                            @foreach (var t in tipo_equipo)
+                            {
+                                <option value="@t.Tipo_EquipoID" @(Model.Tipo_EquipoID == t.Tipo_EquipoID ? "selected" : "")>@t.Nombre</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(x => x.Tipo_EquipoID, null, new { @class = "label label-danger" })
+                    </div>
 
-            <div class="mb-3">
-                @Html.Label("Solución Primaria:", new { @class = "form-label" })
-                @Html.TextAreaFor(x => x.Solucion_Primaria, new { @class = "form-control", id = "solucionPrimariaInforme", placeholder = "Ingrese la solución primaria", rows = 4, required = "required" })
-                <div class="invalid-feedback">Llenar campo</div>
-            </div>
+                    <div class="form-group mb-3">
+                        @Html.Label("Estado:", new { @class = "form-label" })
+                        <select name="EstadoID" class="form-select">
+                            <option value="">--Seleccione--</option>
+                            @foreach (var t in estado)
+                            {
+                                <option value="@t.EstadoID" @(Model.EstadoID == t.EstadoID ? "selected" : "")>@t.Nombre_Estado</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(x => x.EstadoID, null, new { @class = "label label-danger" })
+                    </div>
 
-            <!--Radio Butto-->
-            <hr />
-            <div class="form-group mb-3">
-                @Html.Label("Otras Actividades:", new { @class = "form-label" })
-                <div class="row">
-                    @foreach (var t in o_Actividades)
-                    {
-                        <div class="col-md-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="O_ActividadesID" id="actividad_@t.O_ActividadesID" value="@t.O_ActividadesID" @(Model.O_ActividadesID == t.O_ActividadesID ? "checked" : "")>
-                                <label class="form-check-label" for="actividad_@t.O_ActividadesID">@t.Nombre_O_Actividad</label>
-                            </div>
+                    <div class="mb-3">
+                        @Html.Label("Solución Primaria:", new { @class = "form-label" })
+                        @Html.TextAreaFor(x => x.Solucion_Primaria, new { @class = "form-control", id = "solucionPrimariaInforme", placeholder = "Ingrese la solución primaria", rows = 4, required = "required" })
+                        <div class="invalid-feedback">Llenar campo</div>
+                    </div>
+
+                    <!--Radio Butto-->
+
+                    <hr />
+
+                    <div class="form-group mb-3">
+                        @Html.Label("Otras Actividades:", new { @class = "form-label" })
+                        <div class="row">
+                            @foreach (var t in o_Actividades)
+                            {
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="O_ActividadesID" id="actividad_@t.O_ActividadesID" value="@t.O_ActividadesID" @(Model.O_ActividadesID == t.O_ActividadesID ? "checked" : "")>
+                                        <label class="form-check-label" for="actividad_@t.O_ActividadesID">@t.Nombre_O_Actividad</label>
+                                    </div>
+                                </div>
+                            }
                         </div>
-                    }
-                </div>
-                @Html.ValidationMessageFor(x => x.O_ActividadesID, null, new { @class = "label label-danger" })
-            </div>
-            <hr />
-            <!--fin Radio Butto-->
+                        @Html.ValidationMessageFor(x => x.O_ActividadesID, null, new { @class = "label label-danger" })
+                    </div>
+                    <hr />
 
-            <div class="mb-1">
-                @Html.Label("N.Serie Equipo:", new { @class = "form-label mb-0" })
-                @Html.TextBoxFor(x => x.Serie, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Numero de serie del equipo", required = "required" })
-                <div class="invalid-feedback">
-                    Campo obligatorio*
-                </div>
-            </div>
-            <div class="mb-1">
-                @Html.Label("Codigo patrimonial Equipo:", new { @class = "form-label mb-0" })
-                @Html.TextBoxFor(x => x.Cod_Patrimonial, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Codigo patrimonial del quipo", required = "required" })
-                <div class="invalid-feedback">
-                    Campo obligatorio*
-                </div>
-            </div>
-            <div class="mb-1">
-                @Html.Label("Codigo interno Equipoo:", new { @class = "form-label mb-0" })
-                @Html.TextBoxFor(x => x.Codigo_Interno, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Codigo interno del equipo", required = "required" })
-                <div class="invalid-feedback">
-                    Campo obligatorio*
-                </div>
-            </div>
+                    <!--fin Radio Butto-->
 
-            <div class="mb-1">
-                @Html.Label("Color Equipo:", new { @class = "form-label mb-0" })
-                @Html.TextBoxFor(x => x.Color, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Color del equipo", required = "required" })
-                <div class="invalid-feedback">
-                    Campo obligatorio*
+                    <div class="mb-1">
+                        @Html.Label("N.Serie Equipo:", new { @class = "form-label mb-0" })
+                        @Html.TextBoxFor(x => x.Serie, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Numero de serie del equipo", required = "required" })
+                        <div class="invalid-feedback">
+                            Campo obligatorio*
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        @Html.Label("Codigo patrimonial Equipo:", new { @class = "form-label mb-0" })
+                        @Html.TextBoxFor(x => x.Cod_Patrimonial, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Codigo patrimonial del quipo", required = "required" })
+                        <div class="invalid-feedback">
+                            Campo obligatorio*
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        @Html.Label("Codigo interno Equipoo:", new { @class = "form-label mb-0" })
+                        @Html.TextBoxFor(x => x.Codigo_Interno, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Codigo interno del equipo", required = "required" })
+                        <div class="invalid-feedback">
+                            Campo obligatorio*
+                        </div>
+                    </div>
+
+                    <div class="mb-1">
+                        @Html.Label("Color Equipo:", new { @class = "form-label mb-0" })
+                        @Html.TextBoxFor(x => x.Color, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese Color del equipo", required = "required" })
+                        <div class="invalid-feedback">
+                            Campo obligatorio*
+                        </div>
+                    </div>
+
+                    <div class="mb-1">
+                        @Html.Label("Observaciones Equipo:", new { @class = "form-label mb-0" })
+                        @Html.TextAreaFor(x => x.Observaciones, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese observaciones del equipo", rows = 4 })
+                    </div>
+
                 </div>
-            </div>
-
-            <div class="mb-1">
-                @Html.Label("Observaciones Equipo:", new { @class = "form-label mb-0" })
-                @Html.TextAreaFor(x => x.Observaciones, new { @class = "form-control", id = "descripcionArea", placeholder = "Ingrese observaciones del equipo", rows = 4 })
-            </div>
-
-        </div>
 
 
                 <div class="mb-3">
@@ -244,9 +249,10 @@
                     @Html.TextBoxFor(x => x.Ingreso, new { @class = "form-control", @type = "date", id = "fechaInforme", value = DateTime.Now.ToString("yyyy-MM-dd"), required = "required" })
                     <div class="invalid-feedback">Llenar campo</div>
                 </div>
-                
+
 
                 <!-- Botones de acción -->
+
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <div>
                         <button class="btn btn-phoenix-primary me-1 mb-1" type="submit">Guardar</button>
@@ -255,7 +261,7 @@
                 </div>
             }
 
-
+            
 
 
 
