@@ -1,9 +1,20 @@
-﻿using Munipocollay_InformesTecnicos.Models;
+﻿using iText.Kernel.Pdf;
+using iText.Layout.Element;
+using iText.StyledXmlParser.Jsoup.Nodes;
+using Munipocollay_InformesTecnicos.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
+
+using System.Web.Mvc;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
@@ -24,6 +35,8 @@ namespace Munipocollay_InformesTecnicos.Controllers
         private Equipo objequipo = new Equipo();
 
         private Area objarea = new Area();
+
+
 
         public ActionResult Index(string criterio)
         {
@@ -53,7 +66,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
             {
                 return View(objinformes.Listar());
 
-                
+
             }
             else
             {
@@ -142,5 +155,63 @@ namespace Munipocollay_InformesTecnicos.Controllers
 
             return Redirect("~/Informe/Index");
         }
+
+
+
+
+        //Generar_Informe_Tecnico PDF
+        private Model1 db = new Model1();
+
+        public ActionResult GenerarPDF(int informeID)
+        {
+            // Obtener los datos del informe según el ID
+            var informe = ObtenerInformePorID(informeID);
+
+            if (informe == null)
+            {
+                return HttpNotFound();
+            }
+
+            iTextSharp.text.Document document = new iTextSharp.text.Document();
+            MemoryStream memoryStream = new MemoryStream();
+            iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, memoryStream);
+            document.Open();
+
+            document.Add(new iTextSharp.text.Paragraph("Título del Informe: " + informe.Titulo + " - "+ informeID));
+            document.Add(new iTextSharp.text.Paragraph("Tipo Equipo: " + informe.Tipo_Equipo.Nombre));
+            document.Add(new iTextSharp.text.Paragraph("Area: " + informe.Area.Nombre_Area));
+            document.Add(new iTextSharp.text.Paragraph("Sede: " + informe.Sede.Nombre_Sede));
+            document.Add(new iTextSharp.text.Paragraph("Fallas Reportadas: " + informe.Falla.Nombre_Falla));
+            document.Add(new iTextSharp.text.Paragraph("Otras Actividades: " + informe.O_Actividades.Nombre_O_Actividad));
+            document.Add(new iTextSharp.text.Paragraph("Fecha Solicitada: " + informe.Fecha_Solicitud));
+            document.Add(new iTextSharp.text.Paragraph("Fecha Informe: " + informe.Fecha_Informe));
+            document.Add(new iTextSharp.text.Paragraph("diagnostico: " + informe.Diagnostico));
+
+
+            document.Add(new iTextSharp.text.Paragraph("Nombre Equipo: " + informe.Nombre_Equipos));
+            document.Add(new iTextSharp.text.Paragraph("Tipo Equipo: " + informe.Tipo_Equipo.Nombre));
+            document.Add(new iTextSharp.text.Paragraph("Color: " + informe.Color));
+            document.Add(new iTextSharp.text.Paragraph("N.Serie: " + informe.Serie));
+            document.Add(new iTextSharp.text.Paragraph("Codigo Patrimonial: " + informe.Cod_Patrimonial));
+            document.Add(new iTextSharp.text.Paragraph("Modelo: " + informe.Modelo));
+            document.Add(new iTextSharp.text.Paragraph("Marca: " + informe.Marca));
+            document.Add(new iTextSharp.text.Paragraph("Codigo Interno: " + informe.Codigo_Interno));
+            document.Add(new iTextSharp.text.Paragraph("Observaciones: " + informe.Observaciones));
+
+
+            document.Close();
+            writer.Close();
+
+            byte[] pdfBytes = memoryStream.ToArray();
+            return File(pdfBytes, "application/pdf", informe.Titulo + " - "+ informeID + ".pdf");
+        }
+
+        private Informes ObtenerInformePorID(int informeID)
+        {
+           
+            return db.Informes.Find(informeID);
+        }
+
+
     }
 }
