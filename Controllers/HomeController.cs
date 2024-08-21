@@ -30,49 +30,63 @@ namespace Munipocollay_InformesTecnicos.Controllers
 
         public ActionResult Index()
         {
-            // Obtener el total de informes
+            //Total de Regsitros
             int totalInformes = objinformes.Listar().Count();
+            int totalAreas = objarea.Listar().Count();
+            var totalFallas = objfalla.Listar().Count; 
+            var totalActividades = objo_Actividades.Listar().Count; 
+            var totalSedes = objsede.Listar().Count; 
+            var totalTiposEquipos = objtipo_equipso.Listar().Count; 
+            var totalEstados = objestado.Listar().Count; 
+
+            ViewBag.TotalFallas = totalFallas;
+            ViewBag.TotalActividades = totalActividades;
+            ViewBag.TotalSedes = totalSedes;
+            ViewBag.TotalTiposEquipos = totalTiposEquipos;
+            ViewBag.TotalEstados = totalEstados;
+            ViewBag.TotalAreas = totalAreas;
             ViewBag.TotalInformes = totalInformes;
 
 
-            // Obtener el total de informes
-            int totalAreas = objarea.Listar().Count();
-            ViewBag.TotalAreas = totalAreas;
+
+            // Obtener el total de informes por área
+            var informesPorArea = objinformes.Listar()
+                .GroupBy(i => i.AreaID)
+                .Select(g => new { AreaId = g.Key, Total = g.Count() })
+                .ToList();
+
+            var areas = objarea.Listar();
+            var informesPorAreaConNombre = informesPorArea
+                .Select(i => new { NombreArea = areas.FirstOrDefault(a => a.AreaID == i.AreaId)?.Nombre_Area, i.Total })
+                .ToList();
+
+            ViewBag.InformesPorArea = informesPorAreaConNombre;
 
 
 
-            // Obtener el total de informes agrupados por área
-            var totalInformesPorArea = objinformes.Listar()
-                .GroupBy(i => i.Area.Nombre_Area)
-                .Select(group => new
-                {
-                    Nombre = group.Key,
-                    Total = group.Count()
+            // Obtener el total de informes por sede
+            var informesPorSede = objinformes.Listar()
+                .GroupBy(i => i.SedeID)
+                .Select(g => new { SedeId = g.Key, Total = g.Count() })
+                .ToList();
+
+            var sedes = objsede.Listar();
+            var informesPorSedeConNombre = informesPorSede
+                .Select(i => new { NombreSede = sedes.FirstOrDefault(s => s.SedeID == i.SedeId)?.Nombre_Sede, i.Total })
+                .ToList();
+
+            ViewBag.InformesPorSede = informesPorSedeConNombre;
+
+
+            // Obtener el total de informes por cada tipo de equipo
+            var totalTipoEquiposs = objtipo_equipso.Listar()
+                .GroupBy(te => te.Nombre) // Suponiendo que 'Nombre' es el campo que identifica el tipo de equipo
+                .Select(g => new {
+                    Tipo = g.Key,
+                    Total = g.Sum(te => objinformes.Listar().Count(i => i.Tipo_EquipoID == te.Tipo_EquipoID))
                 }).ToList();
 
-            ViewBag.TotalInformesPorArea = totalInformesPorArea;
-
-
-
-            // Obtener el total de cada módulo
-            int totalFallas = objfalla.Listar().Count();
-            int totalActividades = objo_Actividades.Listar().Count();
-            int totalSedes = objsede.Listar().Count();
-            int totalTiposEquipo = objtipo_equipso.Listar().Count();
-            int totalEstados = objestado.Listar().Count();
-            int totalEquipos = objequipo.Listar().Count();
-
-            // Pasar los totales a la vista
-            ViewBag.TotalesPorModulo = new List<object>
-            {
-                new { Modulo = "Fallas", Total = totalFallas },
-                new { Modulo = "Actividades", Total = totalActividades },
-                new { Modulo = "Sedes", Total = totalSedes },
-                new { Modulo = "Tipos de Equipo", Total = totalTiposEquipo },
-                new { Modulo = "Estados", Total = totalEstados },
-                new { Modulo = "Equipos", Total = totalEquipos },
-                new { Modulo = "Áreas", Total = totalAreas }
-            };
+            ViewBag.TotalTipoEquiposs = totalTipoEquiposs;
 
 
             return View();

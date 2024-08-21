@@ -111,6 +111,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
                 model = new Informes
                 {
                     Titulo = "FORMATO DE INFORME TECNICO DE SOPORTE INFORMATICO 2024"
+
                 };
             }
             else
@@ -159,7 +160,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
 
 
 
-        //Generar_Informe_Tecnico PDF
+        //Generar_Informe_Tecnico PDF _ BIEN
         private Model1 db = new Model1();
 
         public ActionResult GenerarPDF(int informeID)
@@ -172,46 +173,239 @@ namespace Munipocollay_InformesTecnicos.Controllers
                 return HttpNotFound();
             }
 
-            iTextSharp.text.Document document = new iTextSharp.text.Document();
+            // Crear documento PDF
+            iTextSharp.text.Document document = new iTextSharp.text.Document(PageSize.A4, 50, 50, 25, 25);
             MemoryStream memoryStream = new MemoryStream();
             iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, memoryStream);
             document.Open();
 
-            document.Add(new iTextSharp.text.Paragraph("Título del Informe: " + informe.Titulo + " - "+ informeID));
-            document.Add(new iTextSharp.text.Paragraph("Tipo Equipo: " + informe.Tipo_Equipo.Nombre));
-            document.Add(new iTextSharp.text.Paragraph("Area: " + informe.Area.Nombre_Area));
-            document.Add(new iTextSharp.text.Paragraph("Sede: " + informe.Sede.Nombre_Sede));
-            document.Add(new iTextSharp.text.Paragraph("Fallas Reportadas: " + informe.Falla.Nombre_Falla));
-            document.Add(new iTextSharp.text.Paragraph("Otras Actividades: " + informe.O_Actividades.Nombre_O_Actividad));
-            document.Add(new iTextSharp.text.Paragraph("Fecha Solicitada: " + informe.Fecha_Solicitud));
-            document.Add(new iTextSharp.text.Paragraph("Fecha Informe: " + informe.Fecha_Informe));
-            document.Add(new iTextSharp.text.Paragraph("diagnostico: " + informe.Diagnostico));
+            // Cargar las imágenes
+            iTextSharp.text.Image leftImage = iTextSharp.text.Image.GetInstance(Server.MapPath("~/Assets/Images/logomodificado.png")); // Reemplaza con la ruta a tu imagen
+            iTextSharp.text.Image rightImage = iTextSharp.text.Image.GetInstance(Server.MapPath("~/Assets/Images/logotipo_png.png")); // Reemplaza con la ruta a tu imagen
+
+            // Ajustar tamaño de las imágenes si es necesario
+            leftImage.ScaleToFit(100, 50); // Ajustar tamaño según sea necesario
+            rightImage.ScaleToFit(100, 50); // Ajustar tamaño según sea necesario
+
+            // Crear tabla para el encabezado con dos columnas
+            PdfPTable headerTable = new PdfPTable(2) { WidthPercentage = 100 };
+            headerTable.SetWidths(new float[] { 1f, 1f });
+
+            // Agregar imágenes a las celdas
+            PdfPCell leftCell = new PdfPCell(leftImage)
+            {
+                Border = Rectangle.NO_BORDER,
+                HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT,
+                VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE
+            };
+
+            PdfPCell rightCell = new PdfPCell(rightImage)
+            {
+                Border = Rectangle.NO_BORDER,
+                HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT,
+                VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE
+            };
+
+            headerTable.AddCell(leftCell);
+            headerTable.AddCell(rightCell);
+
+            // Agregar la tabla del encabezado al documento
+            document.Add(headerTable);
+
+            // Fuentes y estilos
+            Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16);
+            Font subtitleFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
+            Font sectionFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+            Font normalFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+            BaseColor lightGray = new BaseColor(230, 230, 230); // Color de fondo para los subtítulos
+
+            // Título y subtítulo
+            iTextSharp.text.Paragraph title = new iTextSharp.text.Paragraph("INFORME TÉCNICO DE SOPORTE INFORMÁTICO\n", titleFont)
+            {
+                Alignment = iTextSharp.text.Element.ALIGN_CENTER
+            };
+            document.Add(title);
+
+            iTextSharp.text.Paragraph subtitle = new iTextSharp.text.Paragraph($"N° 0{informeID} - 2024\n\n", titleFont)
+            {
+                Alignment = iTextSharp.text.Element.ALIGN_CENTER
+            };
+            document.Add(subtitle);
 
 
-            document.Add(new iTextSharp.text.Paragraph("Nombre Equipo: " + informe.Nombre_Equipos));
-            document.Add(new iTextSharp.text.Paragraph("Tipo Equipo: " + informe.Tipo_Equipo.Nombre));
-            document.Add(new iTextSharp.text.Paragraph("Color: " + informe.Color));
-            document.Add(new iTextSharp.text.Paragraph("N.Serie: " + informe.Serie));
-            document.Add(new iTextSharp.text.Paragraph("Codigo Patrimonial: " + informe.Cod_Patrimonial));
-            document.Add(new iTextSharp.text.Paragraph("Modelo: " + informe.Modelo));
-            document.Add(new iTextSharp.text.Paragraph("Marca: " + informe.Marca));
-            document.Add(new iTextSharp.text.Paragraph("Codigo Interno: " + informe.Codigo_Interno));
-            document.Add(new iTextSharp.text.Paragraph("Observaciones: " + informe.Observaciones));
+            // Tabla de Datos del Usuario
+            PdfPTable userTable = new PdfPTable(2) { WidthPercentage = 100 };
+            AddSubtitleCellToTable(userTable, "1.- DATOS DEL USUARIO", "", sectionFont, lightGray);
+            AddCellToTable(userTable, "Fecha Solicitud", informe.Fecha_Solicitud?.ToString("dd-MM-yyyy") ?? "N/A", normalFont);
+            AddCellToTable(userTable, "Gerencia / Sub Gerencia / Oficina / Unidad", informe.Area.Nombre_Area, normalFont);
+            AddCellToTable(userTable, "Sede", informe.Sede.Nombre_Sede, normalFont);
+            AddCellToTable(userTable, "Fecha del Informe", informe.Fecha_Informe?.ToString("dd-MM-yyyy") ?? "N/A", normalFont);
+            document.Add(userTable);
 
+            // Espacio entre tablas
+            document.Add(new iTextSharp.text.Paragraph("\n"));
 
+            // Tabla de Solicitud de Soporte Informático
+            PdfPTable soporteTable = new PdfPTable(2) { WidthPercentage = 100 };
+            AddSubtitleCellToTable(soporteTable, "2.- SOLICITUD DE SOPORTE INFORMÁTICO", "", sectionFont, lightGray);
+            AddCellToTable(soporteTable, "Falla Reportada", informe.Falla.Nombre_Falla, normalFont);
+            AddCellToTable(soporteTable, "Equipo Defectuoso", informe.Nombre_Equipos, normalFont);
+            document.Add(soporteTable);
+
+            // Espacio entre tablas
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            // Tabla de Otras Actividades
+            PdfPTable actividadesTable = new PdfPTable(2) { WidthPercentage = 100 };
+            AddSubtitleCellToTable(actividadesTable, "3.- OTRAS ACTIVIDADES", "", sectionFont, lightGray);
+            AddCellToTable(actividadesTable, "Diagnóstico", informe.Diagnostico, normalFont);
+            document.Add(actividadesTable);
+
+            // Espacio entre tablas
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            // Tabla de Detalle Técnico del Hardware y Software
+
+            PdfPTable detalleTable2 = new PdfPTable(2) { WidthPercentage = 100 };
+            PdfPTable detalleTable = new PdfPTable(4) { WidthPercentage = 100 };
+            detalleTable.SetWidths(new float[] { 25f, 25f, 25f, 25f }); // Anchos proporcionales para cada columna
+            AddSubtitleCellToTable(detalleTable2, "4.- DETALLE TÉCNICO DEL HARDWARE Y SOFTWARE", "", sectionFont, lightGray);
+
+            AddCellToTable(detalleTable, "Tipo", "HARDWARE", normalFont);
+            AddCellToTable(detalleTable, "Sub Tipo", informe.Tipo_Equipo.Nombre, normalFont);
+            AddCellToTable(detalleTable, "Color", informe.Color, normalFont);
+            AddCellToTable(detalleTable, "Modelo", informe.Modelo, normalFont);
+            AddCellToTable(detalleTable, "Serie", informe.Serie, normalFont);
+            AddCellToTable(detalleTable, "Marca", informe.Marca, normalFont);
+            AddCellToTable(detalleTable, "Cód. Patrimonial", informe.Cod_Patrimonial, normalFont);
+            AddCellToTable(detalleTable, "Código Interno", informe.Codigo_Interno, normalFont);
+            document.Add(detalleTable2);
+            document.Add(detalleTable);
+
+            // -------------------------------------------
+
+            // Observaciones
+            document.Add(new iTextSharp.text.Paragraph("\nOBSERVACIONES", sectionFont));
+            iTextSharp.text.Paragraph observaciones = new iTextSharp.text.Paragraph(informe.Observaciones, normalFont);
+            document.Add(observaciones);
+
+            // Informe Técnico
+            document.Add(new iTextSharp.text.Paragraph("\nDIAGNOSTICO", sectionFont));
+            iTextSharp.text.Paragraph informeTecnico = new iTextSharp.text.Paragraph(informe.Diagnostico, normalFont);
+            document.Add(informeTecnico);
+
+            // Solución Primaria
+            document.Add(new iTextSharp.text.Paragraph("\nSOLUCIÓN PRIMARIA", sectionFont));
+            iTextSharp.text.Paragraph solucionPrimaria = new iTextSharp.text.Paragraph(informe.Solucion_Primaria, normalFont);
+            document.Add(solucionPrimaria);
+
+            document.Add(new iTextSharp.text.Paragraph("\n", normalFont));
+            PdfPTable finalTable = new PdfPTable(3) { WidthPercentage = 100 };
+
+            PdfPCell cell1 = new PdfPCell(new Phrase("USUARIO", normalFont))
+            {
+                Border = Rectangle.BOX,
+                HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER,
+                VerticalAlignment = PdfPCell.ALIGN_TOP,
+                Padding = 10
+            };
+
+            PdfPCell cell2 = new PdfPCell(new Phrase("SOPORTE", normalFont))
+            {
+                Border = Rectangle.BOX,
+                HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER,
+                VerticalAlignment = PdfPCell.ALIGN_TOP,
+                Padding = 10
+            };
+
+            PdfPCell cell3 = new PdfPCell(new Phrase("RESPONSABLE DE EFTIC", normalFont))
+            {
+                Border = Rectangle.BOX,
+                HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER,
+                VerticalAlignment = PdfPCell.ALIGN_TOP,
+                Padding = 10
+            };
+
+            // Agregar celdas a la primera fila
+            finalTable.AddCell(cell1);
+            finalTable.AddCell(cell2);
+            finalTable.AddCell(cell3);
+
+            // Segunda fila
+            PdfPCell blankCell1 = new PdfPCell(new Phrase("\n", normalFont))
+            {
+                Border = Rectangle.BOX,
+                HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER,
+                VerticalAlignment = PdfPCell.ALIGN_TOP, // Alineación vertical superior
+                Padding = 20,
+            };
+
+            PdfPCell blankCell2 = new PdfPCell(new Phrase("\n", normalFont))
+            {
+                Border = Rectangle.BOX,
+                HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER,
+                VerticalAlignment = PdfPCell.ALIGN_TOP, // Alineación vertical superior
+                Padding = 20,
+            };
+
+            PdfPCell blankCell3 = new PdfPCell(new Phrase("\n", normalFont))
+            {
+                Border = Rectangle.BOX,
+                HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER,
+                VerticalAlignment = PdfPCell.ALIGN_TOP, // Alineación vertical superior
+                Padding = 20,
+            };
+
+            finalTable.AddCell(blankCell1);
+            finalTable.AddCell(blankCell2);
+            finalTable.AddCell(blankCell3);
+
+            // Agregar tabla final al documento
+            document.Add(finalTable);
+
+            // Cerrar el documento
             document.Close();
-            writer.Close();
 
+            // Devolver el archivo PDF como respuesta
             byte[] pdfBytes = memoryStream.ToArray();
-            return File(pdfBytes, "application/pdf", informe.Titulo + " - "+ informeID + ".pdf");
+            return File(pdfBytes, "application/pdf", informe.Titulo + " - " + informeID + ".pdf");
+        }
+
+        private void AddCellToTable(PdfPTable table, string label, string value, Font font)
+        {
+            PdfPCell cellLabel = new PdfPCell(new Phrase(label, font))
+            {
+                Border = Rectangle.BOX, // Ver los bordes
+                Padding = 5
+            };
+            PdfPCell cellValue = new PdfPCell(new Phrase(value, font))
+            {
+                Border = Rectangle.BOX, // Ver los bordes
+                Padding = 5
+            };
+            table.AddCell(cellLabel);
+            table.AddCell(cellValue);
+        }
+
+        private void AddSubtitleCellToTable(PdfPTable table, string subtitle, string value, Font font, BaseColor backgroundColor)
+        {
+            PdfPCell subtitleCell = new PdfPCell(new Phrase(subtitle, font))
+            {
+                Border = Rectangle.BOX,
+                BackgroundColor = backgroundColor,
+                Colspan = 2,
+                Padding = 5
+            };
+            table.AddCell(subtitleCell);
         }
 
         private Informes ObtenerInformePorID(int informeID)
         {
-           
+
             return db.Informes.Find(informeID);
         }
-
-
     }
+
+   
+
 }

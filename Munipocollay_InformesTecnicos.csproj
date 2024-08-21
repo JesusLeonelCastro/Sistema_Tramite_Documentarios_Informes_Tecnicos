@@ -196,6 +196,7 @@
     <Content Include="Assets\css\user.min.css" />
     <Content Include="Assets\images\escudo_png.png" />
     <Content Include="Assets\images\logo2.png" />
+    <Content Include="Assets\images\logomodificado.png" />
     <Content Include="Assets\images\logotipo_png.png" />
     <Content Include="Assets\index.html" />
     <Content Include="Assets\js\all.min.js" />
