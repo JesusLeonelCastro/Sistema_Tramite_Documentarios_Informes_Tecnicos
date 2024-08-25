@@ -198,6 +198,7 @@
     <Content Include="Assets\images\logo2.png" />
     <Content Include="Assets\images\logomodificado.png" />
     <Content Include="Assets\images\logotipo_png.png" />
+    <Content Include="Assets\images\MUNICIPIO-DE-POCOLLAY.jpg" />
     <Content Include="Assets\index.html" />
     <Content Include="Assets\js\all.min.js" />
     <Content Include="Assets\js\anchor.min.js" />
@@ -230,6 +231,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\AutenticationController.cs" />
     <Compile Include="Controllers\EquipoController.cs" />
     <Compile Include="Controllers\EstadosController.cs" />
     <Compile Include="Controllers\FallaController.cs" />
@@ -277,6 +279,8 @@
     <Content Include="Views\Informe\Index.cshtml" />
     <Content Include="Views\Informe\AgregarEditar.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Autentication\Login.cshtml" />
+    <Content Include="Views\Usuario\AgregarEditar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

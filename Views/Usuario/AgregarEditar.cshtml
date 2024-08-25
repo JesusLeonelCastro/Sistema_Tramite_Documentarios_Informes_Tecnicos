@@ -1,0 +1,98 @@
+﻿@model Munipocollay_InformesTecnicos.Models.Usuario
+
+@{
+    ViewBag.Title = "AgregarEditar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!--Pesstañas-->
+<nav class="breadcrumb">
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="~/Home/Index">Home</a></li>
+        <li class="breadcrumb-item"><a href="~/Usuario/Index">Usuario</a></li>
+
+        <li class="breadcrumb-item active">@(Model.UsuarioID > 0 ?  Model.Nombre_Usuario +" " + Model.Apellido_Usuario : "Agregar Usuario")</li>
+    </ol>
+</nav>
+
+<div class="card shadow-none border my-4" data-component-card="data-component-card">
+    <div class="card-header p-4 border-bottom bg-body">
+        <center><h2>AGREGAR USUARIO</h2></center>
+    </div>
+
+
+    <div class="card-body p-4">
+
+
+        @using (Html.BeginForm("Guardar", "Usuario", FormMethod.Post, new { @class = "row g-3 needs-validation", novalidate = "novalidate" }))
+        {
+
+
+            <div class="col">
+
+                <div class="mb-3">
+                    @Html.Label("ID Usuario:", new { @class = "form-label" })
+                    @Html.TextBoxFor(x => x.UsuarioID, new { @class = "form-control", id = "idCategoria", placeholder = "ID", @readonly = "readonly" })
+                </div>
+                <div class="mb-3">
+                    @Html.Label("Nombre Usuairo:", new { @class = "form-label" })
+                    @Html.TextBoxFor(x => x.Nombre_Usuario, new { @class = "form-control", id = "nombreCategoria", placeholder = "Nombre del Usuario", required = "required" })
+                    <div class="invalid-feedback">
+                        Llenar campo
+                    </div>
+                </div>
+
+
+
+                <div class="mb-3">
+                    @Html.Label("Apellidos Usuario:", new { @class = "form-label" })
+                    @Html.TextBoxFor(x => x.Apellido_Usuario, new { @class = "form-control", id = "nombreCategoria", placeholder = "Apellidos Usuario", required = "required" })
+                    <div class="invalid-feedback">
+                        Llenar campo
+                    </div>
+                </div>
+                <div class="mb-3">
+                    @Html.Label("Constraseña:", new { @class = "form-label" })
+                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control", id = "nombreCategoria", type = "password", placeholder = "Ingrese contraseña", required = "required" })
+                    <div class="invalid-feedback">
+                        Llenar campo
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+
+
+                <div class="mb-3">
+                    @Html.Label("N.Documento:", new { @class = "form-label" })
+                    @Html.TextBoxFor(x => x.DNI, new { @class = "form-control", id = "nombreCategoria", placeholder = "Documento Identidad o Ruc", required = "required" })
+                    <div class="invalid-feedback">
+                        Llenar campo
+                    </div>
+                </div>
+                <div class="mb-3">
+                    @Html.Label("Email:", new { @class = "form-label" })
+                    @Html.TextBoxFor(x => x.Correo, new { @class = "form-control", id = "nombreCategoria", placeholder = "Correo Electronico Usuario", required = "required" })
+                    <div class="invalid-feedback">
+                        Llenar campo
+                    </div>
+                </div>
+                
+
+            </div>
+
+
+
+
+
+            <div>
+                <button class="btn btn-phoenix-primary me-1 mb-1" type="submit">Guardar</button>
+                <button class="btn btn-phoenix-danger me-1 mb-1" type="button" onclick="window.location.href='/Usuario/Index'">Cancelar</button>
+            </div>
+        }
+    </div>
+</div>
+
+
+

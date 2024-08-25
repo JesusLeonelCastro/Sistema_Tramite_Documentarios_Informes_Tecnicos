@@ -4,7 +4,9 @@ namespace Munipocollay_InformesTecnicos.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("Usuario")]
     public partial class Usuario
@@ -34,5 +36,118 @@ namespace Munipocollay_InformesTecnicos.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Informes> Informes { get; set; }
+
+
+        //Listar_Usuario
+        public List<Usuario> Listar()
+        {
+            var ObjUsuario = new List<Usuario>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    ObjUsuario = db.Usuario.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en Listar(): " + ex.Message);
+                throw;
+            }
+            return ObjUsuario;
+        }
+
+        //Buscar_Usuario
+        public List<Usuario> Buscar(string criterio)
+        {
+            var ObjUsuario = new List<Usuario>();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    ObjUsuario = db.Usuario.
+                        Where(x => x.Nombre_Usuario.Contains(criterio)).ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+            return ObjUsuario;
+
+        }
+
+        // Obtener_Usuario
+        public Usuario Obtener(int id)
+        {
+
+            var ObjUsuario = new Usuario();
+            try
+            {
+                using (var db = new Model1())
+                {
+                    ObjUsuario = db.Usuario.
+                        Where(x => x.UsuarioID == id).SingleOrDefault();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+            return ObjUsuario;
+
+        }
+
+        //Agregar_Usuario
+        public void Guardar()
+        {
+
+            try
+            {
+                using (var db = new Model1())
+                {
+                    if (this.UsuarioID > 0)
+                    {
+                        db.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Entry(this).State = EntityState.Added;
+                        db.SaveChanges();
+                    }
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
+        //Eliminar_Usuario
+        public void Eliminar()
+        {
+
+            try
+            {
+                using (var db = new Model1())
+                {
+                    db.Entry(this).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
