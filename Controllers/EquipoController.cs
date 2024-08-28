@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
+    [Authorize]
     public class EquipoController : Controller
     {
         private Equipo objequipo= new Equipo();

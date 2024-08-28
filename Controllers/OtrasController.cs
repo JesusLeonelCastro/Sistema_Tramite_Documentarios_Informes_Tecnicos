@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
+    [Authorize]
     public class OtrasController : Controller
     {
         private O_Actividades objo_Actividades = new O_Actividades();

@@ -1,5 +1,6 @@
 namespace Munipocollay_InformesTecnicos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -7,6 +8,9 @@ namespace Munipocollay_InformesTecnicos.Models
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
+    using System.Threading.Tasks;
+   
+
 
     [Table("Usuario")]
     public partial class Usuario
@@ -149,5 +153,40 @@ namespace Munipocollay_InformesTecnicos.Models
                 throw;
             }
         }
+
+
+        Model1 db = new Model1();
+
+        //Autenticar_Login_Usuario
+        public bool Autenticar()
+        {
+
+            return db.Usuario
+                   .Where(x => x.DNI == this.DNI
+                   && x.Password == this.Password)
+                   .FirstOrDefault() != null;
+        }
+
+        //obtener datos del login
+        public Usuario ObtenerDatos(string Correo)
+        {
+            var usuario = new Usuario();
+
+            try
+            {
+                using (var db = new Model1())
+                {
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return usuario;
+        }
+
+
+
     }
 }

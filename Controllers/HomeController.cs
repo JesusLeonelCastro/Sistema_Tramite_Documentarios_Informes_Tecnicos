@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private Informes objinformes = new Informes();

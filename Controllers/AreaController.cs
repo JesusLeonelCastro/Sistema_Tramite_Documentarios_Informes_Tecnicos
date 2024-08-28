@@ -6,7 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace Munipocollay_InformesTecnicos.Controllers
+
 {
+    [Authorize]
     public class AreaController : Controller
     {
         private Area objarea = new Area();
@@ -26,21 +28,21 @@ namespace Munipocollay_InformesTecnicos.Controllers
             }
         }
 
-        //Ver_Categoria
+        //Ver_Area
         public ActionResult Ver(int id)
         {
             return View(objarea.Obtener(id));
 
         }
 
-        //Buscar_Categoria
+        //Buscar_Area
         public ActionResult Buscar(string criterio)
         {
             return View(criterio == null || criterio == "" ? objarea.Listar() : objarea.Buscar(criterio));
 
         }
 
-        //Editar_Categoria
+        //Editar_Area
         public ActionResult AgregarEditar(int id = 0)
         {
             return View(
@@ -50,7 +52,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
         }
 
 
-        //Guardamos_Categoria
+        //Guardamos_Area
         public ActionResult Guardar(Area objarea)
         {
             if (ModelState.IsValid)
@@ -69,7 +71,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
         }
 
 
-        //Eliminamos_Categoria
+        //Eliminamos_Area
         public ActionResult Eliminar(int id)
         {
             objarea.AreaID = id;

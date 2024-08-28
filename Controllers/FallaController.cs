@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
+    [Authorize]
     public class FallaController : Controller
     {
         private Falla objfalla = new Falla();
@@ -26,21 +27,21 @@ namespace Munipocollay_InformesTecnicos.Controllers
             }
         }
 
-        //Ver_Categoria
+        //Ver_Falla
         public ActionResult Ver(int id)
         {
             return View(objfalla.Obtener(id));
 
         }
 
-        //Buscar_Categoria
+        //Buscar_Falla
         public ActionResult Buscar(string criterio)
         {
             return View(criterio == null || criterio == "" ? objfalla.Listar() : objfalla.Buscar(criterio));
 
         }
 
-        //Editar_Categoria
+        //Editar_Falla
         public ActionResult AgregarEditar(int id = 0)
         {
             return View(
@@ -50,7 +51,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
         }
 
 
-        //Guardamos_Categoria
+        //Guardamos_Falla
         public ActionResult Guardar(Falla objfalla)
         {
             if (ModelState.IsValid)
@@ -69,7 +70,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
         }
 
 
-        //Eliminamos_Categoria
+        //Eliminamos_Falla
         public ActionResult Eliminar(int id)
         {
             objfalla.FallaID = id;

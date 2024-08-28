@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
+    [Authorize]
     public class SedeController : Controller
     {
         private Sede objsede = new Sede();
@@ -26,21 +27,21 @@ namespace Munipocollay_InformesTecnicos.Controllers
             }
         }
 
-        //Ver_Categoria
+        //Ver_Sede
         public ActionResult Ver(int id)
         {
             return View(objsede.Obtener(id));
 
         }
 
-        //Buscar_Categoria
+        //Buscar_Sede
         public ActionResult Buscar(string criterio)
         {
             return View(criterio == null || criterio == "" ? objsede.Listar() : objsede.Buscar(criterio));
 
         }
 
-        //Editar_Categoria
+        //Editar_Sede
         public ActionResult AgregarEditar(int id = 0)
         {
             return View(
@@ -50,7 +51,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
         }
 
 
-        //Guardamos_Categoria
+        //Guardamos_Sede
         public ActionResult Guardar(Sede objsede)
         {
             if (ModelState.IsValid)
@@ -69,7 +70,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
         }
 
 
-        //Eliminamos_Categoria
+        //Eliminamos_Sede
         public ActionResult Eliminar(int id)
         {
             objsede.SedeID = id;

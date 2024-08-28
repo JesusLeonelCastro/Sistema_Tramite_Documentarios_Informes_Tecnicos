@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
+    [Authorize]
     public class Tipo_EquipoController : Controller
     {
         private Tipo_Equipo objtipo_equipso = new Tipo_Equipo();
@@ -26,21 +27,21 @@ namespace Munipocollay_InformesTecnicos.Controllers
             }
         }
 
-        //Ver_Categoria
+        //Ver_TipoEquipo
         public ActionResult Ver(int id)
         {
             return View(objtipo_equipso.Obtener(id));
 
         }
 
-        //Buscar_Categoria
+        //Buscar_TipoEquipo
         public ActionResult Buscar(string criterio)
         {
             return View(criterio == null || criterio == "" ? objtipo_equipso.Listar() : objtipo_equipso.Buscar(criterio));
 
         }
 
-        //Editar_Categoria
+        //Editar_TipoEquipo
         public ActionResult AgregarEditar(int id = 0)
         {
             return View(
@@ -50,7 +51,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
         }
 
 
-        //Guardamos_Categoria
+        //Guardamos_TipoEquipo
         public ActionResult Guardar(Tipo_Equipo objtipo_equipso)
         {
             if (ModelState.IsValid)
@@ -69,7 +70,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
         }
 
 
-        //Eliminamos_Categoria
+        //Eliminamos_TipoEquipo
         public ActionResult Eliminar(int id)
         {
             objtipo_equipso.Tipo_EquipoID = id;

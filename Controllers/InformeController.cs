@@ -18,6 +18,7 @@ using iTextSharp.text.pdf;
 
 namespace Munipocollay_InformesTecnicos.Controllers
 {
+    [Authorize]
     public class InformeController : Controller
     {
         private Informes objinformes = new Informes();
@@ -76,7 +77,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
 
         }
 
-        //Ver_Articulo
+        //Ver_Informe 
         public ActionResult Ver(int id)
         {
             return View(objinformes.Obtener(id));
@@ -89,7 +90,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
 
         }
 
-        //Editar_Artoculo
+        //Editar_Informe 
         public ActionResult AgregarEditar(int id = 0)
         {
 
@@ -124,7 +125,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
 
         }
 
-        //Guardar_Articulo
+        //Guardar_Informe 
         public ActionResult Guardar(Informes objinformes)
         {
             if (ModelState.IsValid)
@@ -147,7 +148,7 @@ namespace Munipocollay_InformesTecnicos.Controllers
             }
         }
 
-        //Eliminamos_Articulo
+        //Eliminamos_Informe 
         public ActionResult Eliminar(int id)
         {
             objinformes.InformeID = id;
